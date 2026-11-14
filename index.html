@@ -1,0 +1,1132 @@
+<!doctype html><html lang="en"><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style>
+<title>GRAPH</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<meta name="description" content="GRAPH is an independent Forward Deployed Engineering practice connecting the tools you already use with AI: automation, integration and knowledge infrastructure.">
+</head><body>
+<style>
+  :root{
+    --bg:#0a0d12;
+    --bg-raised:#10141c;
+    --bg-flagship:#12131f;
+    --ink:#eef1f5;
+    --ink-dim:#8f9aab;
+    --ink-faint:#59616e;
+    --accent:#ff9d52;
+    --accent-ink:#1a0f04;
+    --accent-soft:rgba(255,157,82,.13);
+    --accent-2:#5b8cff;
+    --accent-2-soft:rgba(91,140,255,.14);
+    --line:rgba(238,241,245,.09);
+    --line-strong:rgba(238,241,245,.16);
+    --font-display:'Unbounded','Arial Black',sans-serif;
+    --font-body:'IBM Plex Sans','Segoe UI',system-ui,sans-serif;
+    --font-mono:'IBM Plex Mono','SFMono-Regular',Consolas,monospace;
+  }
+
+  *{box-sizing:border-box;}
+  html{color-scheme:dark;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:var(--font-body);
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{font-family:var(--font-display);font-weight:600;margin:0;text-wrap:balance;letter-spacing:-.01em;}
+  p{margin:0;}
+  a{color:inherit;}
+  ::selection{background:var(--accent-soft);color:var(--ink);}
+  @media (prefers-reduced-motion:reduce){ *{scroll-behavior:auto !important;} }
+  html{scroll-behavior:smooth;}
+
+  .wrap{max-width:1180px;margin:0 auto;padding:0 32px;}
+  @media (max-width:640px){ .wrap{padding:0 20px;} }
+
+  .eyebrow{
+    font-family:var(--font-mono);
+    font-size:.72rem;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    color:var(--accent);
+    display:flex;align-items:center;gap:10px;
+  }
+  .eyebrow::before{content:"";width:22px;height:1px;background:var(--accent);display:inline-block;}
+
+  /* ---------- NAV ---------- */
+  header.nav{
+    position:sticky;top:0;z-index:40;
+    background:rgba(9,11,16,.88);
+    backdrop-filter:blur(10px);
+    -webkit-backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-row{
+    display:flex;align-items:center;justify-content:space-between;
+    height:68px;
+  }
+  .wordmark{
+    font-family:var(--font-display);
+    font-weight:800;
+    font-size:1.05rem;
+    letter-spacing:.02em;
+  }
+  .wordmark span{color:var(--accent);}
+  nav.links{display:flex;gap:32px;align-items:center;}
+  nav.links a{
+    font-family:var(--font-mono);
+    font-size:.8rem;
+    letter-spacing:.03em;
+    color:var(--ink-dim);
+    text-decoration:none;
+    transition:color .15s ease;
+  }
+  nav.links a:hover, nav.links a:focus-visible{color:var(--ink);}
+  @media (max-width:760px){ nav.links a.nav-only{display:none;} }
+
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    font-family:var(--font-mono);
+    font-size:.82rem;
+    letter-spacing:.02em;
+    padding:11px 20px;
+    border-radius:3px;
+    text-decoration:none;
+    border:1px solid transparent;
+    cursor:pointer;
+    transition:transform .15s ease, background .15s ease, border-color .15s ease;
+  }
+  .btn:focus-visible{outline:2px solid var(--accent-2);outline-offset:2px;}
+  .btn-primary{background:var(--accent);color:var(--accent-ink);font-weight:500;}
+  .btn-primary:hover{transform:translateY(-1px);}
+  .btn-ghost{border-color:var(--line-strong);color:var(--ink);}
+  .btn-ghost:hover{border-color:var(--ink-dim);}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    overflow:hidden;
+    padding:96px 0 84px;
+    background:
+      radial-gradient(ellipse 900px 560px at 68% 18%, rgba(91,140,255,.16), transparent 60%),
+      radial-gradient(ellipse 700px 500px at 15% 90%, rgba(255,157,82,.08), transparent 65%),
+      var(--bg);
+  }
+  #globe{
+    position:absolute;
+    inset:0;
+    width:100%;height:100%;
+    display:block;
+    pointer-events:none;
+  }
+  .hero-inner{position:relative;z-index:2;}
+  .hero-copy{max-width:680px;}
+  .hero h1{
+    font-size:clamp(2.3rem, 4.6vw + .6rem, 4.1rem);
+    line-height:1.06;
+    margin:20px 0 22px;
+  }
+  .hero-sub{
+    font-size:clamp(1rem, .4vw + .95rem, 1.18rem);
+    color:var(--ink-dim);
+    max-width:52ch;
+    margin-bottom:36px;
+  }
+  .hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:56px;}
+  .hero-foot{
+    display:flex;gap:28px;flex-wrap:wrap;
+    font-family:var(--font-mono);
+    font-size:.74rem;
+    color:var(--ink-faint);
+    letter-spacing:.03em;
+    border-top:1px solid var(--line);
+    padding-top:20px;
+    max-width:680px;
+  }
+  .hero-foot b{color:var(--ink-dim);font-weight:500;}
+
+  /* ---------- SECTION SHELL ---------- */
+  section{padding:96px 0;}
+  section.tight{padding:72px 0;}
+  .section-head{max-width:640px;margin-bottom:52px;}
+  .section-head h2{font-size:clamp(1.7rem, 1.6vw + 1rem, 2.5rem);margin-top:16px;}
+  .section-head p{color:var(--ink-dim);margin-top:16px;max-width:56ch;}
+
+  /* ---------- APPROACH STEPS ---------- */
+  .steps{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+    border-radius:4px;
+    overflow:hidden;
+  }
+  @media (max-width:820px){ .steps{grid-template-columns:1fr;} }
+  .step{background:var(--bg-raised);padding:32px 28px;}
+  .step .num{
+    font-family:var(--font-mono);
+    color:var(--accent);
+    font-size:.8rem;
+    letter-spacing:.05em;
+  }
+  .step h3{font-size:1.15rem;font-family:var(--font-body);font-weight:600;margin:14px 0 10px;}
+  .step p{color:var(--ink-dim);font-size:.94rem;}
+
+  /* ---------- CAPABILITIES ---------- */
+  .cap-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:24px;
+  }
+  @media (max-width:820px){ .cap-grid{grid-template-columns:1fr;} }
+  .cap{
+    padding:28px 26px 30px;
+    border:1px solid var(--line);
+    border-radius:6px;
+    background:linear-gradient(180deg, rgba(255,255,255,.015), transparent);
+  }
+  .cap .tag{
+    font-family:var(--font-mono);
+    font-size:.7rem;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    color:var(--accent-2);
+  }
+  .cap h3{font-size:1.2rem;font-family:var(--font-body);font-weight:600;margin:14px 0 10px;}
+  .cap p{color:var(--ink-dim);font-size:.95rem;}
+
+  /* ---------- USE CASES ---------- */
+  .usecase-scroller{position:relative;}
+  .usecase-scroller::after{
+    content:"";
+    position:absolute;
+    top:0; right:0; bottom:16px;
+    width:56px;
+    background:linear-gradient(to right, transparent, var(--bg));
+    pointer-events:none;
+  }
+  .usecase-row{
+    display:flex;
+    gap:14px;
+    overflow-x:auto;
+    padding:6px 6px 16px 2px;
+    margin:0 -2px;
+    scroll-snap-type:x proximity;
+  }
+  .usecase-row::-webkit-scrollbar{height:6px;}
+  .usecase-row::-webkit-scrollbar-track{background:transparent;}
+  .usecase-row::-webkit-scrollbar-thumb{background:var(--line-strong);border-radius:3px;}
+
+  .usecase-tile{
+    flex:0 0 258px;
+    scroll-snap-align:start;
+    background:var(--bg-raised);
+    border:1px solid var(--line);
+    border-radius:6px;
+    padding:22px 22px 20px;
+    display:flex;
+    flex-direction:column;
+    cursor:pointer;
+    transition:border-color .2s ease, background .2s ease;
+  }
+  .usecase-tile:hover{border-color:var(--line-strong);}
+  .usecase-tile:focus-visible{outline:2px solid var(--accent-2);outline-offset:2px;}
+  .usecase-tile.open{border-color:rgba(255,157,82,.4);}
+
+  .uc-tile-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;}
+  .uc-tile-head .uc-problem{
+    font-family:var(--font-body);
+    font-weight:600;
+    font-size:1rem;
+    color:var(--ink);
+  }
+
+  .uc-toggle{
+    flex:0 0 auto;
+    width:22px; height:22px;
+    margin-top:1px;
+    border-radius:50%;
+    border:1px solid var(--line-strong);
+    position:relative;
+  }
+  .uc-toggle::before, .uc-toggle::after{
+    content:"";
+    position:absolute;
+    top:50%; left:50%;
+    background:var(--ink-dim);
+    transition:transform .3s ease;
+  }
+  .uc-toggle::before{width:10px; height:1.5px; transform:translate(-50%,-50%);}
+  .uc-toggle::after{width:1.5px; height:10px; transform:translate(-50%,-50%) rotate(0deg);}
+  .usecase-tile.open .uc-toggle::after{transform:translate(-50%,-50%) rotate(90deg);}
+  .usecase-tile.open .uc-toggle{border-color:rgba(255,157,82,.5);}
+  .usecase-tile.open .uc-toggle::before, .usecase-tile.open .uc-toggle::after{background:var(--accent);}
+
+  .uc-detail-wrap{
+    display:grid;
+    grid-template-rows:0fr;
+    transition:grid-template-rows .35s ease;
+  }
+  .usecase-tile.open .uc-detail-wrap{grid-template-rows:1fr;}
+  .uc-detail-inner{overflow:hidden;}
+  .uc-detail-inner .uc-arrow{
+    display:block;
+    font-family:var(--font-mono);
+    color:var(--accent);
+    font-size:.78rem;
+    letter-spacing:.04em;
+    margin-top:14px;
+  }
+  .uc-detail-inner .uc-outcome{color:var(--ink-dim);font-size:.92rem;line-height:1.5;margin-top:6px;}
+  @media (prefers-reduced-motion:reduce){
+    .uc-detail-wrap, .uc-toggle::after{transition:none;}
+  }
+  .flip-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:22px;
+    margin-top:28px;
+  }
+  @media (max-width:900px){ .flip-grid{grid-template-columns:1fr;} }
+
+  .flip-tile{
+    perspective:1400px;
+    height:380px;
+    cursor:pointer;
+  }
+  .flip-tile:focus-visible{outline:none;}
+  .flip-tile:focus-visible .flip-tile-inner{outline:2px solid var(--accent-2);outline-offset:3px;}
+
+  .flip-tile-inner{
+    position:relative;
+    width:100%; height:100%;
+    border-radius:8px;
+    transition:transform .7s cubic-bezier(.4,.2,.2,1);
+    transform-style:preserve-3d;
+  }
+  .flip-tile.flipped .flip-tile-inner{transform:rotateY(180deg);}
+
+  .flip-face{
+    position:absolute;
+    inset:0;
+    backface-visibility:hidden;
+    -webkit-backface-visibility:hidden;
+    border:1px solid var(--line);
+    border-radius:8px;
+    background:var(--bg-raised);
+    padding:26px;
+    display:flex;
+    flex-direction:column;
+  }
+  .flip-tile:hover .flip-face{border-color:var(--line-strong);}
+
+  .flip-front{justify-content:space-between;}
+  .flip-tag{
+    font-family:var(--font-mono);
+    font-size:.7rem;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    color:var(--accent-2);
+  }
+  .flip-front h3{font-size:1.1rem;font-family:var(--font-body);font-weight:600;margin:14px 0 0;}
+  .flip-hint{
+    font-family:var(--font-mono);
+    font-size:.72rem;
+    color:var(--ink-faint);
+    letter-spacing:.03em;
+  }
+
+  .flip-back{
+    transform:rotateY(180deg);
+    background:var(--bg-flagship);
+    overflow-y:auto;
+    gap:16px;
+  }
+  .flip-back p{color:var(--ink-dim);font-size:.88rem;line-height:1.5;margin:0;}
+  .flip-steps{
+    list-style:none;
+    margin:0; padding:0;
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+    font-family:var(--font-mono);
+    font-size:.78rem;
+    color:var(--ink);
+    counter-reset:step;
+  }
+  .flip-steps li{
+    counter-increment:step;
+    display:flex;
+    align-items:baseline;
+    gap:10px;
+  }
+  .flip-steps li::before{
+    content:counter(step);
+    color:var(--accent);
+    flex:0 0 auto;
+  }
+  @media (prefers-reduced-motion: reduce){
+    .flip-tile-inner{transition:none;}
+  }
+
+  /* ---------- FLAGSHIP ---------- */
+  .flagship{
+    background:
+      radial-gradient(ellipse 700px 400px at 85% 0%, rgba(91,140,255,.13), transparent 60%),
+      var(--bg-flagship);
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+  }
+  .flagship-grid{
+    display:grid;
+    grid-template-columns:1.1fr 1fr;
+    gap:56px;
+    align-items:center;
+  }
+  @media (max-width:860px){ .flagship-grid{grid-template-columns:1fr;gap:36px;} }
+  .flagship-badge{
+    display:inline-block;
+    font-family:var(--font-mono);
+    font-size:.68rem;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    color:var(--accent);
+    background:var(--accent-soft);
+    border:1px solid rgba(255,157,82,.3);
+    padding:5px 10px;
+    border-radius:3px;
+    margin-bottom:18px;
+  }
+  .flagship h2{font-size:clamp(1.6rem,1.5vw + 1rem,2.2rem);margin-bottom:18px;}
+  .flagship p{color:var(--ink-dim);margin-bottom:14px;max-width:52ch;}
+  .flagship-panel{
+    border:1px solid var(--line-strong);
+    border-radius:8px;
+    background:var(--bg-raised);
+    padding:22px;
+    font-family:var(--font-mono);
+    font-size:.82rem;
+    color:var(--ink-dim);
+  }
+  .flagship-panel .row{
+    display:flex;justify-content:space-between;gap:12px;
+    padding:9px 0;
+    border-bottom:1px solid var(--line);
+  }
+  .flagship-panel .row:last-child{border-bottom:none;}
+  .flagship-panel .row span:first-child{color:var(--ink-faint);}
+  .flagship-panel .row span:last-child{color:var(--ink);}
+  .dot{width:6px;height:6px;border-radius:50%;background:var(--accent-2);display:inline-block;margin-right:8px;box-shadow:0 0 6px var(--accent-2);}
+
+  /* ---------- ASIDE (blockchain) ---------- */
+  .aside{
+    display:flex;gap:16px;
+    max-width:680px;
+    padding-top:36px;
+    margin-top:12px;
+    border-top:1px solid var(--line);
+  }
+  .aside .mark{font-family:var(--font-mono);color:var(--ink-faint);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap;padding-top:2px;}
+  .aside p{color:var(--ink-faint);font-size:.9rem;}
+
+  /* ---------- ABOUT ---------- */
+  .about-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:56px;align-items:start;}
+  @media (max-width:820px){ .about-grid{grid-template-columns:1fr;gap:28px;} }
+  .about-photo{display:flex;flex-direction:column;gap:16px;}
+  .photo-frame{
+    position:relative;
+    width:clamp(140px,16vw,200px);
+    height:clamp(140px,16vw,200px);
+  }
+  .photo-frame::before{
+    /* soft blurred glow standing in for a hard ring */
+    content:"";
+    position:absolute;
+    inset:-22px;
+    border-radius:50%;
+    background:radial-gradient(circle, rgba(255,157,82,.4), rgba(255,157,82,.1) 55%, transparent 75%);
+    filter:blur(11px);
+    z-index:0;
+  }
+  .glass-rim{
+    /* frosted-glass rim sitting right at the photo's edge */
+    position:absolute;
+    inset:-7px;
+    border-radius:50%;
+    background:rgba(255,255,255,.05);
+    border:1px solid rgba(255,255,255,.22);
+    backdrop-filter:blur(6px);
+    -webkit-backdrop-filter:blur(6px);
+    box-shadow:inset 0 1px 1px rgba(255,255,255,.28), inset 0 -2px 8px rgba(0,0,0,.3), 0 10px 26px -10px rgba(0,0,0,.55);
+    z-index:1;
+  }
+  .photo-frame img{
+    position:relative;
+    z-index:2;
+    width:100%;
+    height:100%;
+    border-radius:50%;
+    object-fit:cover;
+    display:block;
+    box-shadow:inset 0 0 0 1px rgba(255,255,255,.12);
+  }
+  .about-photo .photo-cap{
+    font-family:var(--font-mono);
+    font-size:.72rem;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    color:var(--ink-faint);
+  }
+  .about-body p{color:var(--ink-dim);margin-bottom:16px;max-width:58ch;}
+  .about-body p strong{color:var(--ink);font-weight:600;}
+
+  /* ---------- CONTACT / FOOTER ---------- */
+  footer{border-top:1px solid var(--line);background:var(--bg-raised);}
+  .contact{padding:88px 0 64px;text-align:left;}
+  .contact h2{font-size:clamp(1.8rem,2.6vw+1rem,3rem);max-width:14ch;margin-bottom:22px;}
+  .contact-row{display:flex;align-items:center;gap:22px;flex-wrap:wrap;margin-top:8px;}
+  .contact-email{
+    font-family:var(--font-mono);
+    font-size:1rem;
+    color:var(--accent);
+    text-decoration:none;
+    border-bottom:1px solid rgba(255,157,82,.35);
+    padding-bottom:2px;
+  }
+  .contact-email:hover{border-color:var(--accent);}
+  .foot-bottom{
+    border-top:1px solid var(--line);
+    padding:22px 0;
+    display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
+    font-family:var(--font-mono);
+    font-size:.72rem;
+    color:var(--ink-faint);
+    letter-spacing:.03em;
+  }
+</style>
+
+<header class="nav">
+  <div class="wrap nav-row">
+    <div class="wordmark">GRAPH<span>.</span></div>
+    <nav class="links">
+      <a href="#approach" class="nav-only">Approach</a>
+      <a href="#capabilities" class="nav-only">Capabilities</a>
+      <a href="#use-cases" class="nav-only">Use&nbsp;Cases</a>
+      <a href="#knowledge-graph" class="nav-only">Knowledge&nbsp;Graph</a>
+      <a href="#about" class="nav-only">About</a>
+      <a class="btn btn-ghost" href="#contact">Get in touch</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <canvas id="globe" aria-hidden="true"></canvas>
+  <div class="wrap hero-inner">
+    <div class="hero-copy">
+      <div class="eyebrow">Forward Deployed Engineering</div>
+      <h1>Every system you run should talk to the ones next to it.</h1>
+      <p class="hero-sub">GRAPH is an independent engineering practice that embeds inside your team to connect the tools you already use with AI — turning scattered software into one working system, not another platform to switch to.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#contact">Start a conversation</a>
+        <a class="btn btn-ghost" href="#approach">See the approach</a>
+      </div>
+      <div class="hero-foot">
+        <span><b>Based in:</b> Europe, working embedded or remote</span>
+        <span><b>Practice size:</b> one engineer, by design</span>
+        <span><b>Focus:</b> automation, integration, knowledge infrastructure</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="approach">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">The approach</div>
+      <h2>Forward Deployed Engineering, not a slide deck.</h2>
+      <p>Most integration work stalls in the handoff between the people who scope it and the people who build it. GRAPH removes that handoff — the engineer who designs the connection is the one who ships it, inside your tools, on your team's cadence.</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="num">01 — Embed</div>
+        <h3>Join the workflow, not a project plan</h3>
+        <p>A defined engagement inside your existing tools and meetings — not a discovery deck followed by a proposal.</p>
+      </div>
+      <div class="step">
+        <div class="num">02 — Build</div>
+        <h3>Ship into production directly</h3>
+        <p>Automations and integrations are built with the people who'll use them, and go live incrementally, not in one big release.</p>
+      </div>
+      <div class="step">
+        <div class="num">03 — Operate or hand off</div>
+        <h3>Documented, not dependent</h3>
+        <p>Keep it running under the engagement, or transfer it cleanly to an internal owner who actually understands it.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="capabilities">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">What gets connected</div>
+      <h2>Three problems, one practice.</h2>
+    </div>
+    <div class="cap-grid">
+      <div class="cap">
+        <div class="tag">Automation</div>
+        <h3>AI-driven process automation</h3>
+        <p>Repetitive process work — approvals, routing, status reporting — mapped to AI agents and scripts that plug into the systems already in place, instead of a new dashboard nobody opens.</p>
+      </div>
+      <div class="cap">
+        <div class="tag">Integration</div>
+        <h3>Tool integration</h3>
+        <p>Wiring together what a team already pays for — Asana, internal APIs, spreadsheets, and the rest — into a single flow, so information stops being re-typed between systems by hand.</p>
+      </div>
+      <div class="cap">
+        <div class="tag">Infrastructure</div>
+        <h3>Knowledge infrastructure</h3>
+        <p>Notes that link to each other the way the work actually connects, with backlinks and a visual map that surface a related decision the moment it matters again. Everything stays as plain, portable text that people and AI can both read directly, instead of being locked inside a tool only one person knows how to use.</p>
+      </div>
+    </div>
+
+    <div class="aside">
+      <div class="mark">A note on blockchain</div>
+      <p>Blockchain shows up in this practice only where it earns its place — a smart contract, a system that genuinely needs shared, tamper-evident state. It isn't a menu item, and it isn't featured here for its own sake; it's a tool considered like any other, and used rarely.</p>
+    </div>
+  </div>
+</section>
+
+<section id="use-cases">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Where this shows up</div>
+      <h2>The situations this practice is built for.</h2>
+      <p>Not a client list — GRAPH is a new practice. A sense of the kind of problem it's built to take on.</p>
+    </div>
+    <div class="usecase-scroller">
+      <div class="usecase-row" id="usecaseRow">
+        <div class="usecase-tile" tabindex="0" role="button" aria-expanded="false">
+          <div class="uc-tile-head">
+            <div class="uc-problem">Status updates eat a day a week</div>
+            <div class="uc-toggle" aria-hidden="true"></div>
+          </div>
+          <div class="uc-detail-wrap"><div class="uc-detail-inner">
+            <div class="uc-arrow">→</div>
+            <div class="uc-outcome">An agent reads the source systems directly and drafts the update itself, instead of someone compiling it by hand.</div>
+          </div></div>
+        </div>
+        <div class="usecase-tile" tabindex="0" role="button" aria-expanded="false">
+          <div class="uc-tile-head">
+            <div class="uc-problem">The same data gets typed into three tools</div>
+            <div class="uc-toggle" aria-hidden="true"></div>
+          </div>
+          <div class="uc-detail-wrap"><div class="uc-detail-inner">
+            <div class="uc-arrow">→</div>
+            <div class="uc-outcome">A direct integration between the systems already in use, so information moves once and stays consistent.</div>
+          </div></div>
+        </div>
+        <div class="usecase-tile" tabindex="0" role="button" aria-expanded="false">
+          <div class="uc-tile-head">
+            <div class="uc-problem">Process knowledge only lives in people's heads</div>
+            <div class="uc-toggle" aria-hidden="true"></div>
+          </div>
+          <div class="uc-detail-wrap"><div class="uc-detail-inner">
+            <div class="uc-arrow">→</div>
+            <div class="uc-outcome">A structured knowledge vault that captures how the work actually runs, in a form AI can read and act on.</div>
+          </div></div>
+        </div>
+        <div class="usecase-tile" tabindex="0" role="button" aria-expanded="false">
+          <div class="uc-tile-head">
+            <div class="uc-problem">A one-off integration nobody owns</div>
+            <div class="uc-toggle" aria-hidden="true"></div>
+          </div>
+          <div class="uc-detail-wrap"><div class="uc-detail-inner">
+            <div class="uc-arrow">→</div>
+            <div class="uc-outcome">Scoped, built, and embedded directly with the team that will run it — not handed off half-finished.</div>
+          </div></div>
+        </div>
+        <div class="usecase-tile" tabindex="0" role="button" aria-expanded="false">
+          <div class="uc-tile-head">
+            <div class="uc-problem">Meeting decisions evaporate by the next standup</div>
+            <div class="uc-toggle" aria-hidden="true"></div>
+          </div>
+          <div class="uc-detail-wrap"><div class="uc-detail-inner">
+            <div class="uc-arrow">→</div>
+            <div class="uc-outcome">Actions and owners are captured automatically, drafted into follow-ups, and tracked until they're actually done.</div>
+          </div></div>
+        </div>
+        <div class="usecase-tile" tabindex="0" role="button" aria-expanded="false">
+          <div class="uc-tile-head">
+            <div class="uc-problem">The same document gets written from scratch every time</div>
+            <div class="uc-toggle" aria-hidden="true"></div>
+          </div>
+          <div class="uc-detail-wrap"><div class="uc-detail-inner">
+            <div class="uc-arrow">→</div>
+            <div class="uc-outcome">A first draft is generated from the source material, so someone edits instead of starting from a blank page.</div>
+          </div></div>
+        </div>
+        <div class="usecase-tile" tabindex="0" role="button" aria-expanded="false">
+          <div class="uc-tile-head">
+            <div class="uc-problem">"Where did we decide that?" takes an afternoon to answer</div>
+            <div class="uc-toggle" aria-hidden="true"></div>
+          </div>
+          <div class="uc-detail-wrap"><div class="uc-detail-inner">
+            <div class="uc-arrow">→</div>
+            <div class="uc-outcome">An agent searches across the tools and the knowledge vault directly, instead of someone digging through threads by hand.</div>
+          </div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="flip-grid" id="flipGrid">
+      <div class="flip-tile" tabindex="0" role="button" aria-pressed="false">
+        <div class="flip-tile-inner">
+          <div class="flip-face flip-front">
+            <div>
+              <div class="flip-tag">Example pipeline</div>
+              <h3>An inbox that files its own tasks</h3>
+            </div>
+            <div class="flip-hint">Tap to see how it works ↻</div>
+          </div>
+          <div class="flip-face flip-back">
+            <p>Incoming email is read and summarized automatically, checked against the knowledge vault for context and open threads, and turned into a task on the team's kanban board, landing where the work already gets tracked instead of sitting in an inbox waiting to be triaged by hand.</p>
+            <ol class="flip-steps">
+              <li>Email arrives</li>
+              <li>Summarized</li>
+              <li>Checked against the knowledge vault</li>
+              <li>Task created on the board</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+
+      <div class="flip-tile" tabindex="0" role="button" aria-pressed="false">
+        <div class="flip-tile-inner">
+          <div class="flip-face flip-front">
+            <div>
+              <div class="flip-tag">Example pipeline</div>
+              <h3>A closed project leaves something behind besides a closed ticket</h3>
+            </div>
+            <div class="flip-hint">Tap to see how it works ↻</div>
+          </div>
+          <div class="flip-face flip-back">
+            <p>When a project or ticket is marked done, the key decisions and blockers from its notes and threads are pulled together automatically and drafted into a short lessons-learned note. That note is linked into the relevant process note, so the next project starts from what was actually learned instead of a blank page.</p>
+            <ol class="flip-steps">
+              <li>Project closed</li>
+              <li>Notes + threads reviewed</li>
+              <li>Retro drafted</li>
+              <li>Linked for next time</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+
+      <div class="flip-tile" tabindex="0" role="button" aria-pressed="false">
+        <div class="flip-tile-inner">
+          <div class="flip-face flip-front">
+            <div>
+              <div class="flip-tag">Example pipeline</div>
+              <h3>An expense lands in the right place on its own</h3>
+            </div>
+            <div class="flip-hint">Tap to see how it works ↻</div>
+          </div>
+          <div class="flip-face flip-back">
+            <p>A receipt or invoice is read automatically, with the amount, vendor, and category pulled out and logged against the right budget note. Anything over threshold is flagged immediately, instead of surfacing weeks later during reconciliation.</p>
+            <ol class="flip-steps">
+              <li>Receipt arrives</li>
+              <li>Details extracted</li>
+              <li>Logged to budget note</li>
+              <li>Flagged if over threshold</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script id="usecaseTileScript">
+  document.querySelectorAll('.usecase-tile').forEach(function(tile){
+    function toggle(){
+      var isOpen = tile.classList.toggle('open');
+      tile.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    }
+    tile.addEventListener('click', toggle);
+    tile.addEventListener('keydown', function(e){
+      if(e.key === 'Enter' || e.key === ' '){
+        e.preventDefault();
+        toggle();
+      }
+    });
+  });
+
+  document.querySelectorAll('.flip-tile').forEach(function(tile){
+    function flip(){
+      var isFlipped = tile.classList.toggle('flipped');
+      tile.setAttribute('aria-pressed', isFlipped ? 'true' : 'false');
+    }
+    tile.addEventListener('click', flip);
+    tile.addEventListener('keydown', function(e){
+      if(e.key === 'Enter' || e.key === ' '){
+        e.preventDefault();
+        flip();
+      }
+    });
+  });
+</script>
+
+<section id="knowledge-graph" class="flagship">
+  <div class="wrap">
+    <div class="flagship-grid">
+      <div>
+        <span class="flagship-badge">Flagship capability</span>
+        <h2>Your knowledge base, wired for AI.</h2>
+        <p>Most teams' process knowledge lives scattered across documents, chat threads, and the people who happen to remember. GRAPH's flagship approach turns that knowledge into a knowledge graph, a web of linked notes that mirrors how the work actually connects, and uses it as the control layer for programme and project management.</p>
+        <p>Plain text, version-controlled, and directly readable by AI, so automation works from an accurate model of how the work actually runs, not a guess reconstructed from a status meeting.</p>
+      </div>
+      <div class="flagship-panel">
+        <div class="row"><span><span class="dot"></span>knowledge graph</span><span>/programme</span></div>
+        <div class="row"><span><span class="dot"></span>structure</span><span>markdown · linked notes</span></div>
+        <div class="row"><span><span class="dot"></span>read by</span><span>AI agent, on demand</span></div>
+        <div class="row"><span><span class="dot"></span>writes to</span><span>Asana · task owners</span></div>
+        <div class="row"><span><span class="dot"></span>source of truth</span><span>the knowledge graph itself</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap about-grid">
+    <div class="about-photo"><div class="photo-frame"><span class="glass-rim"></span><img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAkGBwgHBgkIBwgKCgkLDRYPDQwMDRsUFRAWIB0iIiAdHx8kKDQsJCYxJx8fLT0tMTU3Ojo6Iys/RD84QzQ5Ojf/2wBDAQoKCg0MDRoPDxo3JR8lNzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzf/wgARCAFAAUADASIAAhEBAxEB/8QAGwAAAgMBAQEAAAAAAAAAAAAAAwQBAgUABgf/xAAYAQEBAQEBAAAAAAAAAAAAAAAAAQIDBP/aAAwDAQACEAMQAAABwalDhM1mrdWS3VlZ6OJmslpryW6OJ6OJ6ILdXqv1ZiejqmO4juiOjuJiOJjoJjoqercLW/ZDglK6Y4mY4t0dUzXh95LcuU7vLWL4QKY3S7Rs9FmLVs2HvP62+TvGZEYfHGDi6mSvdHLMdB3RBPQYibdCTGe+XrfhaTwC4sguNNBksltTJlNjzpazUO0b594LJM7CNrhJPUDrmTSxh9OG+LC6wyhYAwblBB4AwxYCaZI7qGa8k9BYvwOLwDnh2FkMhpFITh8QTr46ssrHx1LenNGKudBqvqMqyRHrwp3U1m8UgvA6wWwznTaCoywoNDU9DrHy19HQxu1u6zqkgCBsAO3WliZ4i8ELcKmej7eQGb9FGLaXcv5abPTBxRpuZlrb5jHoxrnnRpCVCri8ssCqhqT7GzzivsPInoNzF27PlmgloY36m5SGdj+kwcbx6zfeHNGdThvO7Sq1mE0F+mPHLegy7pemkKbznxbJkkJMo2LMHG5252D9ftwou2GE/P8AocLjvLDqLdcbzg2Yz8D0Pn9T0G3i7dfLtFN/GvSMLM8O0Ye1iWZNyT346ekhoeXqatraiZgt6uTg+t8q3Vc1dau/kGXTDB5TQoSQ+hmb+uejWo+nAVKRx6dj7WQCUeT78fSt5mtNZvnPV+Ts3NbzvorPnuhnaeNejYAbh27F18is/ii9HDZ0PMbPm7uCCDlo7mI33xqeY1UprGVdHrUMp6VsqOEhY/dDvosxzr5z3UvrPUErz1qYruFrJ0Ws7edPaT286wMj0Xn5dvewN3Wfmupm6cu6wmz5+98jYx9YWzNFftxH6rxzHn7+vqi7z3S3RrJV309zHyfS+b1qCQy6ELEyijiMejOJjt562Xpm2FN+OxYfpMXphNV9Ltz2dbIc83anntrG642dvH2t5+b6mZqy7DdKePtm4DeL25swIHXJ9LIb563KCHy36Bdd2NJdtPVD5p3P6LkrzZphmKF4UbGsgXt55pePN1me6i4r/n+3NlMI+nP0LmDt+LuHH2cf089Pa87u14PWytfU1UksjhpyuJfpnSU4e2lRBznXAuX1L6WZfOtTOA3uDwfWeYm2L0nn1asqSUhcn13TkUZqduAiKRjTC5FMaHgvZ2sBilI2/T+K0+WtvLLTtkm3g6uOnktjI2OmEs3QSkzwaZzFYn1dKaBO0BVi9Iya0qzMUQUk7Os8z+Ry7SXQf3nHavXfLSnNc1kFCjIAdZSG5hMvB9pSPHXKjlvEEbUFSyGdV18jXM/O0s0Jp5unZD4WrWRHpZA3UlNxgpWLQsTFilI1IARlMkfdV6cMsA4LKil2WSiIkCklZfmfcY0lDguVRby86PrZGsLZ7aNjLeY0a5pi27IWUgRRlgGCWjpWvWqL7eVqRRVlKzihKtKzUIuyulX12DhTQJ1SlMvWybPP6eFtyzl6Sub2rlaYJcy2s00FtVTMKNrxqQhVigD0tRetWx1L1LOqspRMwC09UmLQto4qUIK4Hq3Vjq3SlDKV4/TScgebooZ01pZWgkgPGs028jWmutelM14iLDiBmIlevWxHTwUwbIqK1AxROAOPIC57CFHMw5oR1JI6JdR4NeJsYWaCxBijkNytN3MirFLVocueuNWUS6OUthkL2pc61bIS4ymdW9BgwjVM0tBZpwBEqitHxWZt1uhLiB2HZgp3rHda6ItpuZ1tFpfGw9RnrgLQ5DXjkFn6OUrkgkbuC4a0QhDUuJBNQMWnVe1YCC7PALr05diPItZ3LWa7Wr3T183lJaBrMnq4nnnE3OfXZsK0omgF3li4yJfouIZD6HPqwbNGu6TEb1jbp0bw3atoSieotb1Tq0ETjN5uelejuPZi1STRSg095MWLdfPl5+vl6530ktizxLiTvLtpzXi5l2tQx+qhOFxjquocu0dNsbHvYvqOnKtSz05h4wBe9LVNaUIXZkwx+ipjpg96KsuE3qdKu8E/TmWLVuUs55LWD7GRqp//xAApEAACAgEEAQQCAwEBAQAAAAABAgADEQQSITEQEyIyQRQgIzAzQgVQ/9oACAEBAAEFAv8A72JiYmJiY84mJiYmJiYmJiKPGJj+qqoNPxhPxhPxlj1V1rbesyTBASJVYM0+jafx0n4yT8ZZ+Ms/GWampVh/pxMf2CUNgqciX3ipb7WtZUzBVPSnpwpKbPTddSCUsz5c4GqsySf6APKPB4P9GInES3AbUYFtjWOiRRAJiYmIVzCDWaryIuq4/JEfUAizmbZiYmJiYmIo/SuL5x/U/QEQQCATExNsIjLuWtcgjH9WP0JxKov9p5YCIJiDwJiMvg8Rvev7j9DDmafRPbKov7ZmZmZmZmZ4A4WLMweBBD1GEU7XbuZmZmZgg/QDnR1AxVxKon7H9sQwRYIJiBlE3qfP1Z827mJjyomITiIj3M2latV70PUqiTH6EQzImRMiZEyIIWAguXLO8F7LBqxH1axrbDFYTfFuu37nM9Ny3o2Gfj2z8e2NTYJ6bw5BHEezEpqa06apUXUj+Ne9F1EEqEo06bbNOkGnUTVJsmY3I02mBH4i5/DWfirF0q5t06hLkijaqo7x6yIEzbqKFWtlBi1VmeiuakG9uJSmbkQCbZtjoJsGNagE2R05orAUNtmpt9q96Lx91Sl/axmZrvH1ovhN0zBLjumsrwem2RkVZSMuMFf8J6tMVt8VNgxumk/0HloZquTiWjnTL7Sk1CDavei8YwaZT141kxP+dH8WMReGSMcQLka5f4scmhJ6aCIMlFn18ZURGOYs0g/lhMNkNkzNR3Lppj7DzNSp2DvSOBDaAH+dMp6hmp7xCPbpB7GEU4hMbkrNQm9G4bcT49+QbIikQzbFO6bgkoXaojQibZiagc/V00pyoxNQ4Cfelq9QpUBG+dEp6PjUzEb46T4HwxgPK4nE1n+316ygqwm7dNzYe6zdVuwowNPV6luPL4gxMCavE+rzNIWebXxchn3oPHbUSrqEy/kxzgaa4z3NNphVodwI3YQvNRXk9RlDCsFYHaEMYq7QeJmaVNqczme6Pug3Al2xezF/q+aAALNR196Hx90Ss8CMOLu5qMzQ/JWEyPG0TErHF4mur8YgBiL4aKJR/jB4Y+PrUj3AcXzScLmX9HvQjx/1TK4sJ4vIyGEu6qOyLqG30MSMwnEVgYvV81K7tN9/YgnXgTTENSZmFovjE1a4g6vmm+BMtbg96DqL3TKhDwL79st1G4pYRLLoLJpQDLb/AEhTqix3ZGea/hby2qs9OiZm+CybsxR40Z2qTD4HjM1Z5+tR1pvgRLRw3ejbEzElMrHFp4vpzHTBURxK6y0rJrbAaYCykloE5Tq7vXMWrrOVnp7olQEwPDcsFwobyITGfAuty724jWbhp7ostjd0dr1XKotgAt1AEs1IY8EESyU422cuvRzNM+J6oh1OBuaxrE3JRwIhwc+HfaP/AD0LNGXIXcIHBjNiNZHt4sPudsgNNF8gwxYcxpV2h4qlUtbEtbx6hgfMdorRFdotdk9GbFE4hzlRgVR12XLyJumZzbZSuxI3SnncM4DRqyZarrCY3ihys9dojbo3Y4iNxT1V1qIwzHGJgwRVLHT6cVLzMQLmOIBwo90NzCPWL4qFCQDNs9J2iqlAq1JisGB6Ebv6J9xsMWvIv0Nby3TvVFEzKOmh6W4iUdV9amZm3JNXt9M7qa1CsIvIImMALuZxEHG0vBXxtIgAaWEq2iRWRlGPS3E1TYyEPlVj9rG7oSFpgmOFK6mv0rMzTdNH6HdHVc1PhexyqVjcODjIXsDJtMrXAcRehPswAZsqFi6aj0q3nU+zCYseJGGbG4CLgM3jV0+omJpumjdSjquagQiIsXoQ9UnKnh4Bvtjz6WN2eiZWuBPvMWGGL00HDovIGTY2IFz4MaoeoT6czmP1nmjquWx8RMROTiJKva7iHhaxsrEbuLGn0vNsMMPXQhg+Ld2D3IPaTiKJnPnU+1rXy9fxs6x7qOkl4zNhhyo0ZLQDKzuPyp5jnn6EMEaLKx/PD12e2bwYPiBl3GVX4NOX8AYhmuU+mOXTp+lIzR0ksmZZKK/TSo4mJ8SfiIfk3UMHhe6/9jH+KxOz4MHVfyHy+vlM5gG0eGGYqYcdWdfdPSSzxWM2Yx4XkCNwMw/6n9f+k/1MuPtPCr8fIijEPDPGMrEJ5Ax4ufZXV4boiU9JH8J88ZETgxgSrHlfm36mL2Y/JeAzZNpm0zaZiWD3N8lG4we0Q8zUj+AcT1Y1sR8yk8KwmczEUe6o8EQiKfBOWXv9k7zD8j2vf62Sw5PwVBtWZ3HGJYNy2V7H2T04aorMIjMZSJiDtTg9ideLeLP3SNG7iftcYkT3MxnLkDAjTWD+bxiBYiyteNsx4rM+4JqOBB+1cMfuJ+2oaFttYfdKyWiAKJmGWv6lnlYkrHBg5GJiL7gPFoytLbhmZ8LDBK4ZZ2vYg/Rmlr5aw7znJFoqX1LWNbYiiN0R4EAiyvuvppWZjwPafFkp9lfPhYvZixOjLe0gg8kyx4TlmfMrQw7VG+U2bYG3QyxeYogWLElZ4sPtEU+VhmrYrUjMILoLVaKYO/pYvUt7XodeMx2lr8scBV4Fhi17jsCxeZWMCWiGIIqxYkrlnS9AQeexrDlcQnwrOJTYzuDwp5T4yz5QdGZhaWtG5OJ8inE9XMQGVzPizo91dqOFiRDHMWZiqTAB51Z/l8niaWrZVibZzMkQnLczdib8wtC01FmAIeZnbAN8UBIFLxUExDH6aVdr0sriRuxKxg7hMzdACJrEO6YmIi77v0tnQfwwhQAIoWWqGYVqJiGtXi1KsNKFgCIp8GPDKos//8QAIhEAAgIBBAMBAQEAAAAAAAAAAAECEBEgITAxAxJAQRNR/9oACAEDAQE/AfqdKJ6jgNfBFCVyiNc8RU6et8CMnsjJ7HZkzbEKowHGktiKHHcSMCjlGP8ATA1szFNbUnSpEuqXRGLySEYE7k9qwkS6rqt6SJ9VHqpMVbmHUnvbzbQqRPqovapJMQhaEjob2rBIVIk6Q2d1EzXQt2Kn1SZLsSr3HvWaUsDZ43fklSk0e43Slgbyzxj4ERlklP8AFwpjp8+aQ/hdul8KH8uOVDhhZ1LlhH9Gs9kksbW9UY5Q4DjqirlLA+CPVeR/mpSwf0P6DlnR/8QAJREAAgIBBAICAgMAAAAAAAAAAAECERADICExEjAyQBNBIlBR/9oACAECAQE/AftLDZZ5F/QbLyn9B+xehlFMorFFZQ8ymqFLEpckpf4RnwWWN5TzGVusST/WxkFziS/kS1I1SIdbo4uTILnHeyUjT7xLsogj97V1humJrMXeZGn2MaJEJj3OdHy5IqsOdEOszlyafWGVZVY62S4Q+cLssmqZpfEb5w9NEElihRHpWxRSJ5gsSgmfjPHEtNtkI0jUwxIW1ocaFDdWWsr31eH/AFK+msX7r3P2yZdCbwxbpSpnkKSe6TzGPpl3iC3ONngeAlWz/8QALhAAAQIGAAQGAwACAwAAAAAAAQARAhAgITAxEkFhcSIyQFGBkQMjM0KhUGCx/9oACAEBAAY/Av8Ar2lpPEwC/XCrmfjhTAXWlpaWlr1nVPEabIErdLeqfBeV1dbW/wDheH13TH1zP+Sw9U2V/T7ohxNAPlbeR9A5VgSrAD5XL7V7LwuVcsrxxfatHH9piSW2nQP+l/Mr+ZX8yrwFeQpiGnfSYBRdpGi4XlC1Q5WpaWpGFXTksvM6hCEcA1tOrrwuoy3NpQq2ASIkaBkhIRfRk5KMfwExXDGCYP8AErf+k34oPk6XCbn/ANTIe4wiRkfQfKuuY7K1+9FwMokZFbzkS6Ssr2V4nl4LFQlOU/M4RIyfEKyZXf6WivJF9L+ZXD+OBz3Xj3IPqG+Ky2rmRxNVdPzldMCyGleKji96tK9JkfQXQUMY7Ge6YO2ISMjismTmo9L4IW5YhQcfFK8wgj1wPyJxCg1Ek0srzecRQneYgh80SAHJNhAxMKBReXhCeIopvaqL80XxP3XWh5vntCVpu6uVugqMdaHXCEBIy0rSvCfQsE5vEt1/r+1x+WJXmwDdSi14l+wfITgo0+6eMD6TweErxC3vmAArJV9SsmiRBRjO9Ky6SeFEEMaeOKV7JiLJodcsjzOHuuFcKbAy4Qnm48wyvR0GC+8LJ5vErSOThK4UE661gYoTIlcUVAODcoinToRDYToBNWMR6SvoLomhnxDlib7TZPiRTp6ignOkwpPfBDUMHxiCATSYTij9hhFNtqFE1/FDUalCifiXDDNgo+2Jqex9EO8m5zYakQeaMJ5Zn98BxBcSeXCNJhP4zPgi74vhB/ZdEyablGLOaz3x9FwhNAHKvEmuU8W8zz6m9fzj4YZXVlaElPhNdtyv6G68KveXhHoYYaNpgFfG6cpuSuv1hPHc5r2oh7Uh9m5x9aPF9S9hlc0bQjGudEMPWlkwQneXiAKtCJNEFYLia63g/8QAJxAAAgICAgICAwEAAwEAAAAAAAERIRAxQVFhcSCBkaGxMEDB4fD/2gAIAQEAAT8hf+Sf/EbESTmSScND3iMwRiCCCGQyGQyGQyCGQyH8wIIwkSJEiRIkSLMMUI/wSTNwjwiEiPkY7JDSUu3jiOaYuqH7EntQtJpw0eOeCeGeH+B9MWNpJCJf4KxFQN4Y6JxJPwaGUmARJm/BFtHS6H7IV0JOiA1Ww9YiDb3s5jTXZJOE3YkZJJJJJIr+BINOEoackMhkMhkMhiNiYnYIfIem36ILdv4IYZUkIbK44YhS1emIhK86CDtjwyyzJ/HWjXEYRiCCCPgwj9/IgeChiZIN9DqP/FKSBGJFjTGCMP8Ax+kJMayIiEYIsWcr2QmXyThCMsyLQ8U3XyzQ1EQNYY4fIGxkAQaBMbEkxnyOIs3MZ0Xo3E5GGLiEDomSYP26liUNDQmBXhoaEsSIIIILJLyRooxJYqEXYkTcmyZwkG01TPA3DIpByxbkZGhrEgsXbd8ESh0bFCfkFo0FoacihFZF+VVMmhJwFD6BDKlQGWm9CbuNuZ1BrDxSFOaPGeVMUaaOCiBPQlrwie4hP2G9KZ8Aw1LoFtIPgEpyCwghS9zF+4IgJIEkhftDS/6BM6i3TXeKApImR6iCTwh9A4QX5W9JEFtN8HPG02a4DcJ9Bbu52bslCMSbs1ljVN0+9m8kJp0ixNafBDXMPDIEBxWXCMjcloEwnsUiRKgnU5WLX2FoWxqj8ENZKGWj2QQWoNwQxaHIxoFJUKBxoOR9imtn9JMZGwtPg5CTUNCnwyVNeT/xSI8hv0Diwtv+hL7C6noaFxJdFSj7FVFD2NbmLkYk6w6+wtCkSaIaozhl0veDQ1YkOyInRIw1KFaEW3DoiSn7BIo28hsHRLyl9jT20NJpYXcG2oEN5VoaHRCjXTbERIgZJocka/YlSEs/Dk9BuDrHEm7LoNnoWkaBIVxQjdshWJWOSDtxNdkHbihHE1FkGvsNi6cCDiEudls46HNs+vhkLtR+oJFyXZ4GHcDhHRkaPyLTMDCfHwOhIs3Qn0bvRohYXB2hLQwgVFAldnkOwQ8jkhfYIS9BwiqNqf6EjK18ILW0cuBiF5Hohp6Q6I5dIV5+/wDRBCiSEIg7MoEo12LQWbrCQ9IWm5jRSvcWhuQSkVUZAhggWLTjImjkcfJ5QtaTnzIxK4D61tMcu01a2iMpI+moL0dPAttci6EJKTQdCVlt+BKZEBQk5YUkaImgjYlqOB6FZM0XsJ0Rc0RCHnASBBAqNzZF4JBwNm0QikTu0hyLkrSSth5/Ip84xkW2cln6LZxLwbSRNQxh8WUBKPxBGC2Iml5IoWwtI0JIThjAqYYzY2j1jbB41Jzie0eRwGgpoJBpQ4QmTQnBpDwoPejZyOBVKnsShqfokLLmL9sejYaIqEQLmh3UbhkrgXEDJvsUmOeCjIElonqh3YKJanKx9GySEYSXEY94fK2sD7EhBo0Jk9iagbCP1iGyxgqC6N2cCANmkTmgyrQ6CJyWnBLmmJOVk4SFBvBIUpMQbqiTeCCNlgEGkaQz2Yj0uWIUqSEVSdjWGwTBJroirE1JGbUj1geDcczVG0HJYPROcCFoXY31BVUTW5OxCwGgTet9vROT/HAxbwNZ5QcSbTRd1hT2crFeuFE3PDplProyQQj20DkFIVEW7CAShsNGI1NMR7RLmRLqTnFg5DCW/oaVp7hPw/QvJeSU1bHaHZDIRNIxvTuOGtlOhVDj6JFpFFY/SHKY0Ow1ZePA8hOxu6Hasm2bnA0oTFsemJ5fDw2Exh7oGaE5Et8ESk3nob7oOTNjjBDJ7J59DpS6R1hdlsSJXRD5TH9LeOhNX9HDL0EoZ+eEacqCPJo/WFsSwug52bFKiQ/YPA/Snr8D36iaFRI6jyhuPAqPgSBA0cCSKXIjAoRUJT0VQOCj0SIGaQNp6dDWIt4f9Fa0fwkSUP8AJzEBpO+SPgF8ISyhk0UOsixQS/oJGQJqGpZttMQ+asyw1m/wf1xkeooKVehfVgVUy14RFSI+dvYgod2aKRYh4h6hfHgQpnPL9j3A0gVlig54NaPvg8HBssm3g3sqTp8ol0azfFNvHoTERZOJYQtUKDlCDBNMFscQ5FEwUwLXybGyZZj2Z3GHo3m2AQ5x9nNiaDv4CUtMFkxUyJaCuRzvx6DrkswRShRo5hdY3PI83RFo9rZqWD0aGpsp7IjmR6Y0Ip7CFs1xaSD6JIUeLot5OEOYnhbIhD+UQ9ankagxTSrHqOamN4XYJB4cIgkGmoQ1AQSgvj7ZMiDorLk1NSyNT9mN0bBsXSuhoWNcFEU7bSPBhM/+gUkuhMv87EJCwc2efo3zWNkLqPZDouqVkTz37EqRR+BKxaGU19oam/oeqNXwGb0J+LGg0O8GjF2Dy8a40ux6OyITxMit9RDf+sVChuN/gh7YhIemRNaTIqGCbT3jejfCFH3iiIaGwOL2OEfJYaiGLGil3i0O2apUc4eilZlNfgOLomc8Ik2WbTt9jPM1HsfveLhqbePQSRoq3yOG0JDUEcocg/BDSRuDjPIlpnPgeFeR5aRo8RNG1i8WImXAySB4e4SQZCvsbv8AMxFAiRvE5ZMviYzLZDRAXzEFstGahPIQM5CZY94xMoJ+Wwc2/RqLH+ZwLCxqopFyyam5cPbJmyX3JiRIWhOgJDGcuDVjU6BBQkGxYyosBO8REpWjiSh9hyJiFlGwRRoquFtmhNiYmSQ+sss2xttIlcLSJ+wmL4hDNBUPWSCMFsvxmFQgjcM1DFBX4F5IQsIs/wD40aC1FuDn7HYsIbNnsQRr2G1tdBXBzL2QsNjRKTTWkN7LXoQhI1N1iILJ7FwKWfZQ/e8TSJJ0yginQ05dfeaGv0XFU/Y0o5xJEJgbqUhky0E2p7fR7cHhCsBLwM3TDf4OhZZeCFiQuXoxNCbKy1iR9EamhI0JEIORsWw9DjQcWG9jQ/iIaMoxiZGi0mHxJ1hLbIELTE1gpvghDS1fLYqjWELeyC4qx3WYWpKIpopQsCg4ycKTbR/SEahlg52Ns20SMBk0MRIg9j25F2bZAj8hk028ibOEKYZtYlkzKMNzU1+zZgfsQmO5HacyVWCGzQy9kytbfBoJiaBln9iNeLwKx0jobBLgabE3ikSSJPLNo8EUNKXCEHoQqE+DNZJCGoii2o6EhqODiiJS7DsjDwllEZyhFCdEC9DWNWJcoE6xtDTR52q5UkUSkQQVV6HtYWcoVKfQLLciRGgw2F+CErIhSk7GhJ0rN3PwyIVFHgbFJi4HWe3oWYJQk5I4DtlUi0QJ6smKyxwqhsh0JqUf9ACPQgSzhyihUhShS6Y3h2OzGrG2bmw9H//aAAwDAQACAAMAAAAQXhZYscHDT3dKEYnLbXRJD9nmM8xUPrZ5S/V+AgYPZJmeQIrYY+4HG6/KwEhING6pHDHFOwQXN5x/vlk2NF39y2jKEDMp0FMEZBGjepYuGmqpU3CtesWZiatA63Jhbj4I4NZDuXEi3mSKr7Gh5Pwo70jVKEodEABtlajTSIXDNDi11IqvkJdRV6hg/vDTaUerhLVRucEn5mfIPV/zERSi0XHNsxCzqOZl+0uxOn0T1rS/fTzmfe7+RA3UR/XYGBer9T6eJBRopVLeSul+u3fPL38+mWZAZDKGapPfmjjeLogkuRWW/nSimpTDHZlKvQMoICPunK6CvB/IeT2Eq46PPmgqnQ1uPmbwUELmOnsnw+wDfDMWRIFZ3JjeZymhQqIfCJHfaSN0Bi56Mp4s/8QAHhEBAQEAAwEBAQEBAAAAAAAAAQARECExQSAwUUD/2gAIAQMBAT8Q4yyzjOc/efyTaszDkkHk/jttsg2rGQWRJvBltttvG/nLIOOotS9XrnPwlcOHnbYZh7Gbq9nc49J7KFmC8p+Texh23yRdbIXjaYnc/Yse2T7GkCYXqPSBYWGreoMxjPl93y8Ti2p2TJHqendiw6tJjER25eqcLIR26vl9rrwQi3ID2XQ3vkTT7LhaO2BSAO4sV7iPOD5PriITF7wH+Jwnq97n2RgOlsobLjLu8z5dSZ9snj3Idw+ryQ7CPJ1nBrISATEFBAnFsbPkLybC85LsoyV9uzLOOjOY7WnBDOAWmXiJct423hY6RnPtiwu+yX2+zwF9kPLxHD5+dtR0l11/biHeHiEy9f3sfk4GkGEXiyGT/f7w8f8AETL1H9Q2TRzss3ifZ4LP2Gwna1/4ugEkMpt6/BdkHyQ9/W7HUmznyWux7Ps2/h9ePD8MjqP4vXkEfJn3x9vt/8QAHxEBAQEAAwEBAQEBAQAAAAAAAQARECExIEEwUWFx/9oACAECAQE/ELbbbeNttttt+t+cs4yBYEEmBAeH7ecssjq/2nUts/kPGWWchPvxtsvXFmLO4tttt5AGs+xZxnCQXh/y4G/2DOrVrnCwPy/L9gdLXC2zzbZC6N3OoUgl2eSod3cFrL1wrLRsd/Z8v23tpAu4t/okR7Rm5ayWTDsZcNu+RA4GJl1l+35BB4HtBJM6v+4e+5LQvWOcBhr1MZnXIPYA8A0k26THkuxveHg8iOsqJqGZWhd9THtqix2LvIlnpGvdu5Jgttjttblrsx5NRYkTeDDEe27WBwm7uyH5Bot5kLeO/eU2QAkdtldHBHY9hs0Ngz4R9nVsawZ5D8JZL8ifY9n375IfsH33SZ1wPZGDPtN/gM9s9x7bLsT/AGZvUx9rnxvy8A7nEf08grhykHHqPPjf4b9EZdTHVhhDjO45Toh/t4HwcYE98AsGdTHRFnccjh+3zs0/9W/9hHH5x//EACcQAQACAgIBBAIDAQEBAAAAAAEAESExQVFhEHGBoZGxweHw0SDx/9oACAEBAAE/EBXpcGDLly5cfQuDL9LJZLJZLJZLJZLJZLJZFIpLgVMncpKS5ZKREpBvUuIUimCgMpgpaUy0HBQ/9FVXg2s+kSFLS3ct3LRUXLxX/kAYMGDBdpUtbj0QEA6gEAlEo6lEoPSKBBGHR/Efw/E6T8TtDCH9EmX+IutKeCEyRigLDdCIghuuI2SS2niBNP4SH9TP/mnp7+mwSAdHoFjMdRqNdRqKRSZNQEzA0hQxKguC0pBICAlks7lnotBbHErm42OBNOxX2jpWW2z+00wXxUFu050VmSIOUlUy4AFe5MSsukGP3AoKNDH59BFm3LQ4GWB4JSUlYiJiZlxK8sqVBBmCcSpZGghA/wDMVIsGQ1CQiU4KGC9xWjbVtsNHuPXtDA9upnMT/SD1Ooie4fZCaeaRL/qYmpBhz1DqfmLgFx33LKlqKIyXFRgyQ3AgRQl3whwlTKVuJIBAQEBKQJmC9s5yviHnRbdS1up4Jqo+o2xUt1ETUc4YY2ePExRvtzFWyxlty29xuMSMa6jHWoEagDUoNx6QDLbB9YcQsRoyoLjiDBgwfUy1BUB5e5cuFi4RqAuszDwxzqGMkMFDEM1mItrSNP8Aff5mlyl15Nn+8Rx7wqKRYpGFuWwBxKiVLGIioqugNy/N5P3OoJMHEbSiJDLEHBwUvLxQDDoellUuMVmZJ2oxPESwtYr4YAgl1AZcXLQMgYeouNiWv91HVVAtlRZFRUSLHfMwQigtgDib6FTFos1A9BB9YIbqipiVfp4p1PRJPWlE4tAEHB6Rg6lOrzA5pA9GGaePLCJOK0nCu5kvNXfiEMDhTnP+/MKkNMZYfUt2pUZg+8y3EXSQdMQvCvS0f46gwgr4ywS//wBThP3MtMrv0BG2AtYh4fzCPhh444ooM3UIrVgtiErPAHvc91g5fRKivN7YQjUyiai1ZIDgGZMnzk+X+IqUOpT6JevrkfIwiLmIWGHObibRhUKgEFh+TmpQVPiW/wBX/Y/2R/2a1HxOcvglxfQkASkhBCDdEB0BwRYAv+CGT/j1BgllPEwHaEsR0ygxEAVpDEAs9oUdXSvRkCAoWVpE0NfiEc3tFmPxQl8F9QE24IGyFWrapspl9QLcNrf/ACoCCbIOaJuQKM6SyYFbdErTqhfF7i78dE1Xhht3XYLX1BjW/IHVXcK3CDnSF89sFYNCuYiJJaXwRS7V0sOsnjI4oTHAS+guariDGEMeiP3DwWG5brRCsN0Q5w/79QYQmLqH6IzY5hSGAZbLmKxxzC3qArlBhgHFwaG4UwCgPzmFZVChRZ1+YMFWOoK1T7gfJBJEH7hKIqDNaljdOfll+I8pwiahRvh/CnkQFuvyH9QW6OavLy/BKlshpVltHXtK1qUoTjzAZjYvNf1KSalO4RIgNLHReILVKsHCJ3xglcpzKBGE3DH+bxNEYW1Qy/Fx2QolQJuWMKGr4Ji4ESbIFuJHIeYIKezeYgmC/hGFUDdyLG5VFeRQ/EX3vFkfgCvtGuYxzhEu5wwwwl8jZPZriIA3Qo22DEO80IO1SMlxFcRqV6hFWAcOfR2B7kNuc0lkD8xoT4TBR8SzcHID1Do6elP8U7IRQI8oxUI1sXRcIoGpcLSGl6Y8V4RRGdveaihiwR2MuDANWd+0oEP3FfZrhKfzDZaRbCXtqyWAH4llWXCjtwLLdeJTYiljKJalhC1XRBFhW2NOptjWlxDnbO24YnR6DDDHPTDAtFZhjiUCWoCO2o4kHVDUGIb7csz9hBI6RxADCLMVXPoUj2gBU1D3JQYEwuEDBCSoYR7JFOJSg8FQZExpN2rQqpgaIHVdYdiJdjMoKZlZYEPNN7HusvXfWUheHn3dxnA2g8uh/PxEWKgGDLDiCWUTeiXtolZpdYggAY+diZhqTvmV0gzll0B8T9TVLl4PQA5HEee5cyo8MZqN5qGcwxiXAjYNoy7gI83MdXA4dSkCqq+5eLrroqXJiUhkjcAdWagIBcGzrmHhaaHl9wml2EMFMahF5XuFgYM128QwHLv3hHALfYcTEWmTLqEDxu6lTFHhYB567gEEXUW1dS1zBFlS/MBqTIOoYTR5/hMSFD8EEqw8Tdl+ErRjaXvSVav5hCYShiodKI7YxDEU4mYEWGVoMDco9qoctWP7IWlPh/MTIQPJLIW/EyDPeJdOCHBxkzccQUYcIKdRC8eiBVMwPRUyRXEAoxcushiibpsR5kfxGCaF2hGkZ+yehZay7nUuBdQRbiuEl87iQAXDpJDTuGcL1AW4AspInlXRgAygtvES6XS/Dn6WDm45mowbmNcsHf8AiKw7qZFeWCh5mWKknhISo3swGEFptDgPcJeCmB8P0o5xWnhMBcZA5IJ5n+1EQLfxDUlQpiXSjUVDL4ZiunmALdbKsPGYi/dynltR4j6bcAQCIHzLGtkA1vmNR5qUBhdRblxos0slkepjy5lJL3F1CrqUDx4jBbNx8XhgxlhHcS5kuFN4BB0IKxlFjqOhfCIOYZ7EEWLdtweCZJBge0qWcgJl07omzG2GLQ76j4nvMHGLRUkNgw3F2inFSs8EpFFwBHBLDegcy5hp18BBs9n9Si0wJZUfsW+YBoj2hHj2ev8AQEqwEDwS4iBgt2SyBXEE2kMxKZcNV2lqHmAouyZgyAQllXcRZ4hh3qOhhsUNJ1MgJjuFNmjbcykTV8Qf9lFxi1RphsgULJZNMUxVLaxORWvMEYGGFRaULp/6imhHAwH2hiLLDHXen4MSxFOLKKq0IbMxIOahEqjNxyfmJGI4TI9Q9Ah/glwmrctQxzdwW2qNQ5XMRFGCLOApguGaqMgh+8opSM8TNw4+0YYeY4LiNTTK1OKBUBVZhlX8Qn0FFBNR4D6gMu9xHuXZMEV/CIoCulQReDPvBQ3FMVaDwtn0xqOsRt1QgTlHUa6ujlmY1qNcHLBrAGCVBXvIAC11e4RL5zbL+Vysxp+Oal+Do0fxDto83GOMuoEJzA10OoPt4gisYKMmoL+MH0jHPMU3FBURsmEig8YG4XwxWWeB/wBhKCxqsRdJl8xlhh9yg+Y9RlM0MZSjIAWq4I1QLc2H4cE4FhSwd8n3EVFsnD5ITd0+Khi2fAQHEOZCgfO41OSsfs59oAAcIUnuaYAUuTj36n3H6mJKJtySJyMDKq7YQMaTGWVQDlDfvcJS9vb9/wDiBq1NJtf8fDDgbhGDLl4gzmaiDd6g+sP0ip+ZiiBZZHJ6RJZmgBKTwChl7lZAwS15LEoqMrUPxEamuZi0ViOXVeIfWAwdQ7Ml6oGw4R2KOLd/LiF0iApVOyX8Le2AKcfmDRS8kcSfyMdFFRoUOufeOQB3TD7QZmCZuOyLM7uHY7rVml1wG32hgDoNwdvUG7jKWDmA8fEWsV+1N86Je96ufon6Ys/MSM5iHQy4wp9oxvyJ/wA0DhHMzMeK5i7NBKN2l5mSpxKoVuC5cEJAIDawfcBdkW+/DLjO19Wv4l/xZgRF7RKGIOZC9fJQMGUs9QQp3BClL8E5D2CZdq3qX94V+wRPb/E5+Mem+UAZs3NftP0xHg5jsE3GT0iqkYnkbl+i5hpzPqKDwuPaGEZbK/fERgcTYENRuvMyUztKAN3iO1KL93UGvBGw9y7oJmK5ly+hwaZg7lnXVk6zFvxBLmu3zMTdYA5lU1HHSOB+CC/eH0CoPDmcMwmVKXqvmaPafpl33RIU6jplJUaOZcURiaHELrKNXzAETVIa+kZ/bKM5Xe4qyYfGGDgw+mX/AKTcVr/SLedMxhtjoOYNHtLIspjKwSqtLaYPspgqaw8niWLe2cTAXjgIq6/Z17xxNvL3KXavPw/3L/KjcdSxBGpbc0+0f1mmWeo5b9Jon8TgaX7n+IGUIZjmySqznsOzkiyIKJPKD8Rr7g6kbjuiK+YqUNQLSZsnxgvqZs3vEwBoiodRQHpvnF4ngRAJoB8TK8qB8xEry12v+EWacZywwQK+GcrOV2zA8wMG1Ju3PxEh5RV7UHaMRZuLH2jkti8xhWN1YCFsmqeX+qWOp1EYMrUfkzklCa/BnJPJWhPNLtmQQooJkTAgvENeRKPeP1HhPHEbyG45ZiYQXLukvralStJj5Sr2CZeMq93mKmA0jj2hgcw81l1yZY6Hg6ikxwJ2O4GXDPYUjoPEscRhbjx9vQthuawJHUZZbRKd28kolbJanhFjsTHaHFRlPEzyzJmBDLAre5Tw3+c1JlHgIqxtxDU+INplQXSXDBBeWfMZlw9r+6lqLQ3MEK1eYtTRt4IORbtQSusjPLh9wLt2sr5lgYjsFgAyeIsfaKLno2K2GFBYKYt7TqN+N5O4SYEsHT4lDa2lkO2I0IYp6Goeigz5YfcX0TrLL0TBAG21wVrJY4r8yn+0LbtBt/xAWlXS1GXY/Cbft+pwaW14loeg1cQYFTKKlMP/AIQqHhHxEbIbWZ0VJj7y8MDRGvRYOKvSe6tZhdFPb5RQ4lP3BLuYbRl9nosm4NwhEyRLqyZ+Kj9yyVW18e3vFs6ZsdQ3fqv5f6nAhqGYMSovdD9MZ96fuUHLy9Q/NisHm1LBqH/zIRChqDfbA8Mz4NA9nD+JlEizRKs4vZK0GULJKhyngla/EYxAIbgGD+cEGwIA7GB5Jp/DBq8ui9BKzBPx0/UU6BjifgmBbCbfB+4W6VqAd4i3uPL9EV2f+AgNJNQK+MgE1bGZtQa/0QIFQUoO+ZYCrf2IYTMhImiGDEIGPSptXLBVZMtYYNi5yQBKg04lQm4Phl2tdzAiimRLpmsVr2fgTdKvYv7juqCsen6/uGkfDK1FiUkyZalVkAX81FKJNBr5YvUlDwOYApvl7Z0S/H28x2sCWvEYpQ6HQ1MiG5aQECRVxxDhi8v3KWxFYoqi61MREwGyENfkanskSkDLLkqVBUdkLa8/xTfD8BgtZdJ/lEDFHEDiYQzuIaCR4LzFGBr95xjFloQQCquj78zOhcGpT0jyKtviUCpWhoS7uUfXr1bLTUWPQPGeDBZRV2sRg3LCmFCtpjbzfkhROnUJLq4OR+SHH1UNtVATcvYypEN39D3Av3BamK9hMVw/MsTXxFZFMMBMwLl8RGnKHasAzKste/eZHTXMKj3tX+CFd1q1HghptdzImi6UKssHpFgjliZlXkKhS5wyoF5mw1KrMbklWzV2QQ1mijIzL/iwmsR9hIE4U2PEMwcMrhbfb0z939sdMz+M+pUQOQd/ub3zA7SqX+Yp5zgQ1D+zM3gsnXiJrgdiWy/AHxLYt9kGCU8XUU1uuJrBqjeZRWVESuIcQ4QUY8HcV+aUUkTBCHVMIcygnwwOStngx/MFmRepUuIrsKTSNJASgHEWQkXwD3jDoNcQsXGeZSxQxf3FV3MBCoCDOOx/cVSueaV7Snlox7wFdho6mwDY78Qb+YrF0/wj+4rhl8DxCZQGiFgMzcwW3iEReIVJwipIgJf6szJO2AQ28Btgh4TlCaC/LFWSniYL6SjlqvsKf3GiliTNlSjiXKaJ5AQ7t0fBKPEbamcFOI2bKQFMmyogtHwstwo6ckOaGtnJ8QjTL2hlcLt7CzALIAxByHgmTMvSty1A+7BM5q66jU1m7GU/iDrSIRgm72mcdQTgTRmLUySWiGqvDHRjcQJaN08R4EcdT3YbefJg+YgtdbA0dXzMhi+4XY+25eKagQFaDRAr8wjwy/r1UQFx8jyfBGpsPlqAwKmfMFZEpZePcrhXRMZ05ZULK6bXtF7C3wYVVQ+Jt4scOsRCq+Dc4QCTT7aZbyrVhTFWhSbhPrT7EpOAmLP/2Q==" alt="Olaf, founder of GRAPH" width="200" height="200"></div><span class="photo-cap">Olaf &mdash; GRAPH</span></div>
+    <div class="about-body">
+      <div class="eyebrow">About</div>
+      <h2 style="margin:16px 0 22px;font-size:clamp(1.7rem,1.6vw + 1rem,2.5rem);">One engineer, embedded.</h2>
+      <p>GRAPH is Olaf — a single practice, deliberately. <strong>No bench, no account team:</strong> the person you talk to during scoping is the person who writes the integration and sits with your team while it beds in.</p>
+      <p>The work draws on a background in process management, systems integration, and design-led problem solving — applied the same way whether the task is untangling a reporting process or connecting a knowledge vault to an AI agent.</p>
+      <p>Staying small is a choice, not a starting point waiting to be outgrown. It keeps the distance between "we should automate this" and "it's running" as short as it can be.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap contact" id="contact">
+    <div class="eyebrow">Get in touch</div>
+    <h2 style="margin-top:16px;">Let's connect your systems.</h2>
+    <p style="color:var(--ink-dim);max-width:48ch;">Tell me what's scattered across too many tools right now, and where you'd want it to end up instead.</p>
+    <div class="contact-row">
+      <a class="contact-email" href="mailto:olafappel@web.de">olafappel@web.de</a>
+      <a class="btn btn-primary" href="mailto:olafappel@web.de">Start a conversation</a>
+    </div>
+  </div>
+  <div class="wrap foot-bottom">
+    <span>GRAPH — Forward Deployed Engineering</span>
+    <span>&copy; 2026</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var canvas = document.getElementById('globe');
+  var ctx = canvas.getContext('2d');
+  var hero = canvas.parentElement;
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+  var W, H, R, cx, cy;
+
+  function resize(){
+    var rect = hero.getBoundingClientRect();
+    W = rect.width; H = rect.height;
+    canvas.width = W * dpr; canvas.height = H * dpr;
+    canvas.style.width = W + 'px'; canvas.style.height = H + 'px';
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    cx = W * 0.66; cy = H * 0.48;
+    R = Math.min(W, H) * 0.37;
+  }
+  window.addEventListener('resize', resize);
+  resize();
+
+  var TILT = -0.42; // fixed camera tilt (radians)
+
+  function toXYZ(latDeg, lonDeg){
+    var lat = latDeg * Math.PI/180, lon = lonDeg * Math.PI/180;
+    return {
+      x: Math.cos(lat)*Math.cos(lon),
+      y: Math.sin(lat),
+      z: Math.cos(lat)*Math.sin(lon)
+    };
+  }
+  function rotY(p, a){
+    var c=Math.cos(a), s=Math.sin(a);
+    return { x:p.x*c + p.z*s, y:p.y, z:-p.x*s + p.z*c };
+  }
+  function rotX(p, a){
+    var c=Math.cos(a), s=Math.sin(a);
+    return { x:p.x, y:p.y*c - p.z*s, z:p.y*s + p.z*c };
+  }
+  function project(p){
+    var r = rotX(rotY(p, currentAngle), TILT);
+    return { x: cx + r.x*R, y: cy - r.y*R, z: r.z };
+  }
+  function slerp(a, b, t){
+    var dot = a.x*b.x + a.y*b.y + a.z*b.z;
+    dot = Math.max(-1, Math.min(1, dot));
+    var theta = Math.acos(dot) * t;
+    var relX = b.x - a.x*dot, relY = b.y - a.y*dot, relZ = b.z - a.z*dot;
+    var len = Math.sqrt(relX*relX + relY*relY + relZ*relZ) || 1;
+    relX/=len; relY/=len; relZ/=len;
+    var ct = Math.cos(theta), st = Math.sin(theta);
+    return { x: a.x*ct + relX*st, y: a.y*ct + relY*st, z: a.z*ct + relZ*st };
+  }
+
+  // real-world landmass, sampled from Natural Earth (110m) as a lat/lon dot grid
+  var LAND_FLAT = [-88,-180,-88,-165.33,-88,-150.67,-88,-136,-88,-121.33,-88,-106.67,-88,-92,-88,-77.33,-88,-62.67,-88,-48,-88,-33.33,-88,-18.67,-88,-4,-88,10.67,-88,25.33,-88,40,-88,54.67,-88,69.33,-88,84,-88,98.67,-88,113.33,-88,128,-88,142.67,-88,157.33,-88,172,-85.8,-180,-85.8,-165.33,-85.8,-150.67,-85.8,-136,-85.8,-121.33,-85.8,-106.67,-85.8,-92,-85.8,-77.33,-85.8,-62.67,-85.8,-48,-85.8,-33.33,-85.8,-18.67,-85.8,-4,-85.8,10.67,-85.8,25.33,-85.8,40,-85.8,54.67,-85.8,69.33,-85.8,84,-85.8,98.67,-85.8,113.33,-85.8,128,-85.8,142.67,-85.8,157.33,-85.8,172,-83.6,-150.67,-83.6,-136,-83.6,-121.33,-83.6,-106.67,-83.6,-92,-83.6,-77.33,-83.6,-62.67,-83.6,-48,-83.6,-33.33,-83.6,-18.67,-83.6,-4,-83.6,10.67,-83.6,25.33,-83.6,40,-83.6,54.67,-83.6,69.33,-83.6,84,-83.6,98.67,-83.6,113.33,-83.6,128,-83.6,142.67,-83.6,157.33,-81.4,-150.67,-81.4,-136,-81.4,-121.33,-81.4,-106.67,-81.4,-92,-81.4,-77.33,-81.4,-33.33,-81.4,-18.67,-81.4,-4,-81.4,10.67,-81.4,25.33,-81.4,40,-81.4,54.67,-81.4,69.33,-81.4,84,-81.4,98.67,-81.4,113.33,-81.4,128,-81.4,142.67,-81.4,157.33,-79.2,-144.78,-79.2,-133.04,-79.2,-121.3,-79.2,-109.56,-79.2,-97.81,-79.2,-86.07,-79.2,-27.37,-79.2,-15.63,-79.2,-3.89,-79.2,7.85,-79.2,19.59,-79.2,31.33,-79.2,43.07,-79.2,54.82,-79.2,66.56,-79.2,78.3,-79.2,90.04,-79.2,101.78,-79.2,113.52,-79.2,125.26,-79.2,137,-79.2,148.74,-79.2,160.48,-77,-140.88,-77,-131.1,-77,-121.32,-77,-111.54,-77,-101.76,-77,-91.98,-77,-82.2,-77,-23.52,-77,-13.74,-77,-3.96,-77,5.82,-77,15.6,-77,25.38,-77,35.16,-77,44.94,-77,54.72,-77,64.5,-77,74.28,-77,84.06,-77,93.84,-77,103.62,-77,113.4,-77,123.18,-77,132.96,-77,142.74,-77,152.52,-77,162.3,-74.8,-129.65,-74.8,-121.26,-74.8,-112.87,-74.8,-96.09,-74.8,-87.7,-74.8,-79.31,-74.8,-70.92,-74.8,-12.18,-74.8,-3.79,-74.8,4.6,-74.8,12.99,-74.8,21.38,-74.8,29.77,-74.8,38.16,-74.8,46.55,-74.8,54.94,-74.8,63.34,-74.8,71.73,-74.8,80.12,-74.8,88.51,-74.8,96.9,-74.8,105.29,-74.8,113.68,-74.8,122.07,-74.8,130.46,-74.8,138.85,-74.8,147.24,-74.8,155.64,-74.8,164.03,-72.6,-62.29,-72.6,-10.79,-72.6,-3.44,-72.6,3.92,-72.6,11.28,-72.6,18.64,-72.6,25.99,-72.6,33.35,-72.6,40.71,-72.6,48.06,-72.6,55.42,-72.6,62.78,-72.6,70.13,-72.6,77.49,-72.6,84.85,-72.6,92.2,-72.6,99.56,-72.6,106.92,-72.6,114.27,-72.6,121.63,-72.6,128.99,-72.6,136.34,-72.6,143.7,-72.6,151.06,-72.6,158.42,-72.6,165.77,-70.4,16.75,-70.4,29.87,-70.4,36.42,-70.4,42.98,-70.4,49.54,-70.4,56.1,-70.4,62.66,-70.4,75.77,-70.4,82.33,-70.4,88.89,-70.4,95.45,-70.4,102.01,-70.4,108.57,-70.4,115.12,-70.4,121.68,-70.4,128.24,-70.4,134.8,-70.4,141.36,-70.4,147.92,-70.4,154.47,-70.4,161.03,-68.2,-67.44,-68.2,45.11,-68.2,51.04,-68.2,56.96,-68.2,62.89,-68.2,68.81,-68.2,80.66,-68.2,86.58,-68.2,92.51,-68.2,98.43,-68.2,104.35,-68.2,110.28,-68.2,116.2,-68.2,122.13,-68.2,128.05,-68.2,133.97,-68.2,139.9,-68.2,145.82,-55,-68.77,-52.8,-70.84,-50.6,-72.55,-50.6,-69.09,-48.4,-73.96,-48.4,-70.65,-48.4,-67.34,-46.2,-75.11,-46.2,-71.93,-46.2,-68.75,-46.2,169.64,-44,-72.96,-44,-69.9,-44,-66.84,-44,171.71,-41.8,-73.76,-41.8,-70.81,-41.8,-67.86,-41.8,147.58,-41.8,174.14,-39.6,-71.5,-39.6,-68.65,-39.6,-65.79,-39.6,-62.94,-39.6,176.9,-37.4,-72,-37.4,-69.23,-37.4,-66.46,-37.4,-63.69,-37.4,-60.92,-37.4,-58.15,-37.4,141.24,-37.4,144.01,-37.4,146.78,-37.4,149.55,-35.2,-72.31,-35.2,-69.62,-35.2,-66.92,-35.2,-64.23,-35.2,-61.54,-35.2,-58.85,-35.2,140.38,-35.2,143.08,-35.2,145.77,-35.2,148.46,-33,-69.83,-33,-67.2,-33,-64.58,-33,-61.96,-33,-59.33,-33,-56.71,-33,-54.09,-33,19.36,-33,21.99,-33,24.61,-33,27.23,-33,116.42,-33,119.04,-33,121.67,-33,134.78,-33,137.41,-33,140.03,-33,142.65,-33,145.28,-33,147.9,-33,150.52,-30.8,-69.87,-30.8,-67.31,-30.8,-64.74,-30.8,-62.18,-30.8,-59.62,-30.8,-57.06,-30.8,-54.5,-30.8,-51.94,-30.8,19.78,-30.8,22.34,-30.8,24.9,-30.8,27.46,-30.8,30.02,-30.8,117.1,-30.8,119.66,-30.8,122.23,-30.8,124.79,-30.8,127.35,-30.8,129.91,-30.8,132.47,-30.8,135.03,-30.8,137.59,-30.8,140.15,-30.8,142.72,-30.8,145.28,-30.8,147.84,-30.8,150.4,-30.8,152.96,-28.6,-69.75,-28.6,-67.24,-28.6,-64.74,-28.6,-62.23,-28.6,-59.72,-28.6,-57.22,-28.6,-54.71,-28.6,-52.21,-28.6,-49.7,-28.6,17.95,-28.6,20.46,-28.6,22.97,-28.6,25.47,-28.6,27.98,-28.6,30.48,-28.6,115.68,-28.6,118.18,-28.6,120.69,-28.6,123.19,-28.6,125.7,-28.6,128.21,-28.6,130.71,-28.6,133.22,-28.6,135.72,-28.6,138.23,-28.6,140.74,-28.6,143.24,-28.6,145.75,-28.6,148.25,-28.6,150.76,-28.6,153.26,-26.4,-69.47,-26.4,-67.02,-26.4,-64.56,-26.4,-62.1,-26.4,-59.65,-26.4,-57.19,-26.4,-54.74,-26.4,-52.28,-26.4,-49.82,-26.4,16.49,-26.4,18.95,-26.4,21.4,-26.4,23.86,-26.4,26.32,-26.4,28.77,-26.4,31.23,-26.4,114.74,-26.4,117.19,-26.4,119.65,-26.4,122.11,-26.4,124.56,-26.4,127.02,-26.4,129.47,-26.4,131.93,-26.4,134.39,-26.4,136.84,-26.4,139.3,-26.4,141.76,-26.4,144.21,-26.4,146.67,-26.4,149.12,-26.4,151.58,-24.2,-69.05,-24.2,-66.64,-24.2,-64.23,-24.2,-61.81,-24.2,-59.4,-24.2,-56.99,-24.2,-54.58,-24.2,-52.17,-24.2,-49.75,-24.2,-47.34,-24.2,15.37,-24.2,17.78,-24.2,20.19,-24.2,22.6,-24.2,25.02,-24.2,27.43,-24.2,29.84,-24.2,32.25,-24.2,34.66,-24.2,44.31,-24.2,46.72,-24.2,114.26,-24.2,116.67,-24.2,119.08,-24.2,121.5,-24.2,123.91,-24.2,126.32,-24.2,128.73,-24.2,131.14,-24.2,133.56,-24.2,135.97,-24.2,138.38,-24.2,140.79,-24.2,143.2,-24.2,145.62,-24.2,148.03,-24.2,150.44,-22,-68.48,-22,-66.11,-22,-63.73,-22,-61.36,-22,-58.99,-22,-56.62,-22,-54.24,-22,-51.87,-22,-49.5,-22,-47.12,-22,-44.75,-22,-42.38,-22,14.57,-22,16.94,-22,19.31,-22,21.69,-22,24.06,-22,26.43,-22,28.8,-22,31.18,-22,33.55,-22,45.41,-22,47.79,-22,116.6,-22,118.97,-22,121.34,-22,123.72,-22,126.09,-22,128.46,-22,130.83,-22,133.21,-22,135.58,-22,137.95,-22,140.32,-22,142.7,-22,145.07,-22,147.44,-22,166.43,-19.8,-70.1,-19.8,-67.76,-19.8,-65.43,-19.8,-63.09,-19.8,-60.75,-19.8,-58.41,-19.8,-56.07,-19.8,-53.74,-19.8,-51.4,-19.8,-49.06,-19.8,-46.72,-19.8,-44.38,-19.8,-42.04,-19.8,14.07,-19.8,16.41,-19.8,18.75,-19.8,21.09,-19.8,23.43,-19.8,25.76,-19.8,28.1,-19.8,30.44,-19.8,32.78,-19.8,44.47,-19.8,46.81,-19.8,121.63,-19.8,123.97,-19.8,126.31,-19.8,128.65,-19.8,130.99,-19.8,133.32,-19.8,135.66,-19.8,138,-19.8,140.34,-19.8,142.68,-19.8,145.01,-19.8,147.35,-17.6,-69.21,-17.6,-66.91,-17.6,-64.6,-17.6,-62.29,-17.6,-59.98,-17.6,-57.67,-17.6,-55.37,-17.6,-53.06,-17.6,-50.75,-17.6,-48.44,-17.6,-46.13,-17.6,-43.83,-17.6,-41.52,-17.6,13.88,-17.6,16.18,-17.6,18.49,-17.6,20.8,-17.6,23.11,-17.6,25.42,-17.6,27.72,-17.6,30.03,-17.6,32.34,-17.6,34.65,-17.6,36.96,-17.6,46.19,-17.6,48.5,-17.6,122.35,-17.6,124.66,-17.6,126.97,-17.6,129.28,-17.6,131.59,-17.6,133.89,-17.6,136.2,-17.6,138.51,-17.6,140.82,-17.6,143.13,-17.6,145.43,-17.6,177.75,-15.4,-72.75,-15.4,-70.47,-15.4,-68.19,-15.4,-65.9,-15.4,-63.62,-15.4,-61.34,-15.4,-59.06,-15.4,-56.78,-15.4,-54.49,-15.4,-52.21,-15.4,-49.93,-15.4,-47.65,-15.4,-45.37,-15.4,-43.08,-15.4,-40.8,-15.4,13.96,-15.4,16.25,-15.4,18.53,-15.4,20.81,-15.4,23.09,-15.4,25.37,-15.4,27.66,-15.4,29.94,-15.4,32.22,-15.4,34.5,-15.4,36.78,-15.4,39.07,-15.4,48.19,-15.4,125.78,-15.4,128.06,-15.4,130.34,-15.4,132.62,-15.4,134.91,-15.4,141.75,-15.4,144.03,-15.4,166.85,-13.2,-76.05,-13.2,-73.79,-13.2,-71.53,-13.2,-69.27,-13.2,-67.01,-13.2,-64.76,-13.2,-62.5,-13.2,-60.24,-13.2,-57.98,-13.2,-55.72,-13.2,-53.46,-13.2,-51.2,-13.2,-48.94,-13.2,-46.68,-13.2,-44.42,-13.2,-42.16,-13.2,-39.9,-13.2,14.33,-13.2,16.59,-13.2,18.85,-13.2,21.11,-13.2,23.37,-13.2,25.63,-13.2,27.89,-13.2,30.15,-13.2,32.41,-13.2,34.67,-13.2,36.93,-13.2,39.19,-13.2,131.84,-13.2,134.1,-13.2,136.36,-13.2,143.14,-11,-76.91,-11,-74.66,-11,-72.42,-11,-70.18,-11,-67.94,-11,-65.7,-11,-63.46,-11,-61.22,-11,-58.98,-11,-56.74,-11,-54.49,-11,-52.25,-11,-50.01,-11,-47.77,-11,-45.53,-11,-43.29,-11,-41.05,-11,-38.81,-11,14.98,-11,17.22,-11,19.46,-11,21.71,-11,23.95,-11,26.19,-11,28.43,-11,30.67,-11,32.91,-11,35.15,-11,37.39,-11,39.64,-8.8,-77.59,-8.8,-75.37,-8.8,-73.14,-8.8,-70.92,-8.8,-68.69,-8.8,-66.46,-8.8,-64.24,-8.8,-62.01,-8.8,-59.78,-8.8,-57.56,-8.8,-55.33,-8.8,-53.11,-8.8,-50.88,-8.8,-48.65,-8.8,-46.43,-8.8,-44.2,-8.8,-41.98,-8.8,-39.75,-8.8,-37.52,-8.8,-35.3,-8.8,13.68,-8.8,15.91,-8.8,18.13,-8.8,20.36,-8.8,22.58,-8.8,24.81,-8.8,27.04,-8.8,29.26,-8.8,31.49,-8.8,33.72,-8.8,35.94,-8.8,38.17,-8.8,118.31,-8.8,120.54,-8.8,142.8,-8.8,147.25,-6.6,-80.34,-6.6,-78.12,-6.6,-75.91,-6.6,-73.7,-6.6,-71.48,-6.6,-69.27,-6.6,-67.05,-6.6,-64.84,-6.6,-62.62,-6.6,-60.41,-6.6,-58.19,-6.6,-55.98,-6.6,-53.76,-6.6,-51.55,-6.6,-49.33,-6.6,-47.12,-6.6,-44.9,-6.6,-42.69,-6.6,-40.48,-6.6,-38.26,-6.6,-36.05,-6.6,12.68,-6.6,14.89,-6.6,17.11,-6.6,19.32,-6.6,21.54,-6.6,23.75,-6.6,25.96,-6.6,28.18,-6.6,30.39,-6.6,32.61,-6.6,34.82,-6.6,37.04,-6.6,105.69,-6.6,107.91,-6.6,138.91,-6.6,141.13,-6.6,143.34,-6.6,145.56,-6.6,147.77,-4.4,-80.71,-4.4,-78.5,-4.4,-76.29,-4.4,-74.09,-4.4,-71.88,-4.4,-69.67,-4.4,-67.47,-4.4,-65.26,-4.4,-63.06,-4.4,-60.85,-4.4,-58.64,-4.4,-56.44,-4.4,-54.23,-4.4,-52.02,-4.4,-49.82,-4.4,-47.61,-4.4,-45.4,-4.4,-43.2,-4.4,-40.99,-4.4,-38.78,-4.4,11.97,-4.4,14.17,-4.4,16.38,-4.4,18.59,-4.4,20.79,-4.4,23,-4.4,25.2,-4.4,27.41,-4.4,29.62,-4.4,31.82,-4.4,34.03,-4.4,36.24,-4.4,38.44,-4.4,104.64,-4.4,120.08,-4.4,122.29,-4.4,135.53,-4.4,137.74,-4.4,139.94,-4.4,142.15,-4.4,144.36,-2.2,-80.93,-2.2,-78.73,-2.2,-76.52,-2.2,-74.32,-2.2,-72.12,-2.2,-69.92,-2.2,-67.72,-2.2,-65.52,-2.2,-63.31,-2.2,-61.11,-2.2,-58.91,-2.2,-56.71,-2.2,-54.51,-2.2,-52.31,-2.2,-50.1,-2.2,-47.9,-2.2,-45.7,-2.2,11.54,-2.2,13.74,-2.2,15.94,-2.2,18.15,-2.2,20.35,-2.2,22.55,-2.2,24.75,-2.2,26.95,-2.2,29.15,-2.2,31.36,-2.2,33.56,-2.2,35.76,-2.2,37.96,-2.2,40.16,-2.2,101.81,-2.2,104.01,-2.2,110.61,-2.2,112.82,-2.2,115.02,-2.2,119.42,-2.2,121.62,-2.2,132.63,-2.2,137.03,-2.2,139.24,0,-78.8,0,-76.6,0,-74.4,0,-72.2,0,-70,0,-67.8,0,-65.6,0,-63.4,0,-61.2,0,-59,0,-56.8,0,-54.6,0,-52.4,0,11.4,0,13.6,0,15.8,0,18,0,20.2,0,22.4,0,24.6,0,26.8,0,29,0,31.2,0,33.4,0,35.6,0,37.8,0,40,0,42.2,0,101.6,0,110.4,0,112.6,0,114.8,0,117,0,128,2.2,-76.52,2.2,-74.32,2.2,-72.12,2.2,-69.92,2.2,-67.72,2.2,-65.52,2.2,-63.31,2.2,-61.11,2.2,-58.91,2.2,-56.71,2.2,-54.51,2.2,-52.31,2.2,11.54,2.2,13.74,2.2,15.94,2.2,18.15,2.2,20.35,2.2,22.55,2.2,24.75,2.2,26.95,2.2,29.15,2.2,31.36,2.2,33.56,2.2,35.76,2.2,37.96,2.2,40.16,2.2,42.36,2.2,44.57,2.2,99.61,2.2,112.82,2.2,115.02,2.2,117.22,4.4,-76.29,4.4,-74.09,4.4,-71.88,4.4,-69.67,4.4,-67.47,4.4,-65.26,4.4,-63.06,4.4,-60.85,4.4,-58.64,4.4,-56.44,4.4,-54.23,4.4,-52.02,4.4,-7.89,4.4,9.76,4.4,11.97,4.4,14.17,4.4,16.38,4.4,18.59,4.4,20.79,4.4,23,4.4,25.2,4.4,27.41,4.4,29.62,4.4,31.82,4.4,34.03,4.4,36.24,4.4,38.44,4.4,40.65,4.4,42.86,4.4,45.06,4.4,47.27,4.4,98.02,4.4,102.43,4.4,115.67,4.4,117.88,6.6,-75.91,6.6,-73.7,6.6,-71.48,6.6,-69.27,6.6,-67.05,6.6,-64.84,6.6,-62.62,6.6,-60.41,6.6,-58.19,6.6,-9.47,6.6,-7.26,6.6,-5.04,6.6,-2.83,6.6,-0.61,6.6,1.6,6.6,3.82,6.6,6.03,6.6,8.25,6.6,10.46,6.6,12.68,6.6,14.89,6.6,17.11,6.6,19.32,6.6,21.54,6.6,23.75,6.6,25.96,6.6,28.18,6.6,30.39,6.6,32.61,6.6,34.82,6.6,37.04,6.6,39.25,6.6,41.47,6.6,43.68,6.6,45.9,6.6,48.11,6.6,81.33,6.6,101.26,6.6,116.77,8.8,-82.05,8.8,-79.82,8.8,-77.59,8.8,-75.37,8.8,-73.14,8.8,-70.92,8.8,-68.69,8.8,-66.46,8.8,-64.24,8.8,-62.01,8.8,-13.03,8.8,-10.81,8.8,-8.58,8.8,-6.36,8.8,-4.13,8.8,-1.9,8.8,0.32,8.8,2.55,8.8,4.78,8.8,7,8.8,9.23,8.8,11.45,8.8,13.68,8.8,15.91,8.8,18.13,8.8,20.36,8.8,22.58,8.8,24.81,8.8,27.04,8.8,29.26,8.8,31.49,8.8,33.72,8.8,35.94,8.8,38.17,8.8,40.39,8.8,42.62,8.8,44.85,8.8,47.07,8.8,49.3,8.8,80.47,8.8,98.28,8.8,124.99,11,-74.66,11,-72.42,11,-70.18,11,-14.15,11,-11.91,11,-9.67,11,-7.43,11,-5.19,11,-2.95,11,-0.71,11,1.54,11,3.78,11,6.02,11,8.26,11,10.5,11,12.74,11,14.98,11,17.22,11,19.46,11,21.71,11,23.95,11,26.19,11,28.43,11,30.67,11,32.91,11,35.15,11,37.39,11,39.64,11,41.88,11,48.6,11,50.84,11,77.74,11,104.63,11,106.87,11,122.56,11,124.8,13.2,-87.35,13.2,-85.09,13.2,-15.04,13.2,-12.78,13.2,-10.52,13.2,-8.26,13.2,-6,13.2,-3.74,13.2,-1.48,13.2,0.78,13.2,3.04,13.2,5.3,13.2,7.56,13.2,9.82,13.2,12.07,13.2,14.33,13.2,16.59,13.2,18.85,13.2,21.11,13.2,23.37,13.2,25.63,13.2,27.89,13.2,30.15,13.2,32.41,13.2,34.67,13.2,36.93,13.2,39.19,13.2,41.45,13.2,43.71,13.2,75.35,13.2,77.61,13.2,79.87,13.2,102.46,13.2,104.72,13.2,106.98,13.2,109.24,13.2,120.54,15.4,-91,15.4,-88.72,15.4,-86.44,15.4,-84.16,15.4,-15.7,15.4,-13.42,15.4,-11.14,15.4,-8.86,15.4,-6.57,15.4,-4.29,15.4,-2.01,15.4,0.27,15.4,2.55,15.4,4.84,15.4,7.12,15.4,9.4,15.4,11.68,15.4,13.96,15.4,16.25,15.4,18.53,15.4,20.81,15.4,23.09,15.4,25.37,15.4,27.66,15.4,29.94,15.4,32.22,15.4,34.5,15.4,36.78,15.4,39.07,15.4,43.63,15.4,45.91,15.4,48.19,15.4,50.48,15.4,75.58,15.4,77.86,15.4,98.4,15.4,100.68,15.4,102.96,15.4,105.24,15.4,107.52,15.4,121.22,17.6,-101.53,17.6,-99.22,17.6,-96.91,17.6,-94.6,17.6,-92.29,17.6,-89.99,17.6,-16.13,17.6,-13.82,17.6,-11.51,17.6,-9.21,17.6,-6.9,17.6,-4.59,17.6,-2.28,17.6,0.03,17.6,2.33,17.6,4.64,17.6,6.95,17.6,9.26,17.6,11.57,17.6,13.88,17.6,16.18,17.6,18.49,17.6,20.8,17.6,23.11,17.6,25.42,17.6,27.72,17.6,30.03,17.6,32.34,17.6,34.65,17.6,36.96,17.6,43.88,17.6,46.19,17.6,48.5,17.6,50.8,17.6,53.11,17.6,73.88,17.6,76.19,17.6,78.5,17.6,80.81,17.6,94.66,17.6,96.96,17.6,99.27,17.6,101.58,17.6,103.89,17.6,106.2,19.8,-105.18,19.8,-102.84,19.8,-100.5,19.8,-98.16,19.8,-88.81,19.8,-72.44,19.8,-16.32,19.8,-13.99,19.8,-11.65,19.8,-9.31,19.8,-6.97,19.8,-4.63,19.8,-2.29,19.8,0.04,19.8,2.38,19.8,4.72,19.8,7.06,19.8,9.4,19.8,11.74,19.8,14.07,19.8,16.41,19.8,18.75,19.8,21.09,19.8,23.43,19.8,25.76,19.8,28.1,19.8,30.44,19.8,32.78,19.8,35.12,19.8,42.13,19.8,44.47,19.8,46.81,19.8,49.15,19.8,51.49,19.8,53.82,19.8,56.16,19.8,74.87,19.8,77.21,19.8,79.54,19.8,81.88,19.8,84.22,19.8,93.57,19.8,95.91,19.8,98.25,19.8,100.59,19.8,102.93,19.8,105.26,19.8,109.94,22,-104.07,22,-101.7,22,-99.33,22,-80.34,22,-77.97,22,-16.28,22,-13.91,22,-11.53,22,-9.16,22,-6.79,22,-4.41,22,-2.04,22,0.33,22,2.7,22,5.08,22,7.45,22,9.82,22,12.19,22,14.57,22,16.94,22,19.31,22,21.69,22,24.06,22,26.43,22,28.8,22,31.18,22,33.55,22,35.92,22,40.67,22,43.04,22,45.41,22,47.79,22,50.16,22,52.53,22,54.9,22,57.28,22,71.51,22,73.89,22,76.26,22,78.63,22,81.01,22,83.38,22,85.75,22,88.12,22,92.87,22,95.24,22,97.61,22,99.99,22,102.36,22,104.73,22,107.11,22,109.48,22,111.85,24.2,-105.23,24.2,-102.82,24.2,-100.41,24.2,-97.99,24.2,-13.57,24.2,-11.16,24.2,-8.75,24.2,-6.34,24.2,-3.93,24.2,-1.51,24.2,0.9,24.2,3.31,24.2,5.72,24.2,8.13,24.2,10.55,24.2,12.96,24.2,15.37,24.2,17.78,24.2,20.19,24.2,22.6,24.2,25.02,24.2,27.43,24.2,29.84,24.2,32.25,24.2,34.66,24.2,39.49,24.2,41.9,24.2,44.31,24.2,46.72,24.2,49.14,24.2,51.55,24.2,56.37,24.2,68.43,24.2,70.84,24.2,73.26,24.2,75.67,24.2,78.08,24.2,80.49,24.2,82.9,24.2,85.32,24.2,87.73,24.2,90.14,24.2,92.55,24.2,94.96,24.2,97.38,24.2,99.79,24.2,102.2,24.2,104.61,24.2,107.02,24.2,109.44,24.2,111.85,24.2,114.26,24.2,116.67,24.2,121.5,26.4,-108.77,26.4,-106.32,26.4,-103.86,26.4,-101.4,26.4,-98.95,26.4,-81.75,26.4,-12.98,26.4,-10.53,26.4,-8.07,26.4,-5.61,26.4,-3.16,26.4,-0.7,26.4,1.75,26.4,4.21,26.4,6.67,26.4,9.12,26.4,11.58,26.4,14.04,26.4,16.49,26.4,18.95,26.4,21.4,26.4,23.86,26.4,26.32,26.4,28.77,26.4,31.23,26.4,33.68,26.4,38.6,26.4,41.05,26.4,43.51,26.4,45.97,26.4,48.42,26.4,58.25,26.4,60.7,26.4,63.16,26.4,65.61,26.4,68.07,26.4,70.53,26.4,72.98,26.4,75.44,26.4,77.9,26.4,80.35,26.4,82.81,26.4,85.26,26.4,87.72,26.4,90.18,26.4,92.63,26.4,95.09,26.4,97.54,26.4,100,26.4,102.46,26.4,104.91,26.4,107.37,26.4,109.83,26.4,112.28,26.4,114.74,26.4,117.19,26.4,119.65,28.6,-109.84,28.6,-107.33,28.6,-104.83,28.6,-102.32,28.6,-99.82,28.6,-97.31,28.6,-82.28,28.6,-9.61,28.6,-7.1,28.6,-4.6,28.6,-2.09,28.6,0.41,28.6,2.92,28.6,5.43,28.6,7.93,28.6,10.44,28.6,12.94,28.6,15.45,28.6,17.95,28.6,20.46,28.6,22.97,28.6,25.47,28.6,27.98,28.6,30.48,28.6,35.49,28.6,38,28.6,40.51,28.6,43.01,28.6,45.52,28.6,48.02,28.6,53.03,28.6,55.54,28.6,58.05,28.6,60.55,28.6,63.06,28.6,65.56,28.6,68.07,28.6,70.57,28.6,73.08,28.6,75.59,28.6,78.09,28.6,80.6,28.6,83.1,28.6,85.61,28.6,88.11,28.6,90.62,28.6,93.13,28.6,95.63,28.6,98.14,28.6,100.64,28.6,103.15,28.6,105.65,28.6,108.16,28.6,110.67,28.6,113.17,28.6,115.68,28.6,118.18,28.6,120.69,30.8,-115.97,30.8,-110.85,30.8,-108.29,30.8,-105.72,30.8,-103.16,30.8,-100.6,30.8,-98.04,30.8,-95.48,30.8,-92.92,30.8,-90.36,30.8,-87.8,30.8,-85.23,30.8,-82.67,30.8,-8.4,30.8,-5.84,30.8,-3.27,30.8,-0.71,30.8,1.85,30.8,4.41,30.8,6.97,30.8,9.53,30.8,12.09,30.8,14.65,30.8,17.22,30.8,22.34,30.8,24.9,30.8,27.46,30.8,30.02,30.8,32.58,30.8,35.14,30.8,37.71,30.8,40.27,30.8,42.83,30.8,45.39,30.8,47.95,30.8,50.51,30.8,53.07,30.8,55.63,30.8,58.2,30.8,60.76,30.8,63.32,30.8,65.88,30.8,68.44,30.8,71,30.8,73.56,30.8,76.12,30.8,78.68,30.8,81.25,30.8,83.81,30.8,86.37,30.8,88.93,30.8,91.49,30.8,94.05,30.8,96.61,30.8,99.17,30.8,101.74,30.8,104.3,30.8,106.86,30.8,109.42,30.8,111.98,30.8,114.54,30.8,117.1,30.8,119.66,33,-117.04,33,-114.42,33,-111.8,33,-109.17,33,-106.55,33,-103.93,33,-101.3,33,-98.68,33,-96.06,33,-93.43,33,-90.81,33,-88.19,33,-85.56,33,-82.94,33,-80.32,33,-6.87,33,-4.25,33,-1.62,33,1,33,3.62,33,6.25,33,8.87,33,11.49,33,35.1,33,37.73,33,40.35,33,42.97,33,45.6,33,48.22,33,50.84,33,53.46,33,56.09,33,58.71,33,61.33,33,63.96,33,66.58,33,69.2,33,71.83,33,74.45,33,77.07,33,79.7,33,82.32,33,84.94,33,87.57,33,90.19,33,92.81,33,95.44,33,98.06,33,100.68,33,103.31,33,105.93,33,108.55,33,111.18,33,113.8,33,116.42,33,119.04,35.2,-120.77,35.2,-118.08,35.2,-115.38,35.2,-112.69,35.2,-110,35.2,-107.31,35.2,-104.62,35.2,-101.92,35.2,-99.23,35.2,-96.54,35.2,-93.85,35.2,-91.15,35.2,-88.46,35.2,-85.77,35.2,-83.08,35.2,-80.38,35.2,-77.69,35.2,-5,35.2,0.38,35.2,3.08,35.2,5.77,35.2,8.46,35.2,24.61,35.2,38.08,35.2,40.77,35.2,43.46,35.2,46.15,35.2,48.85,35.2,51.54,35.2,54.23,35.2,56.92,35.2,59.61,35.2,62.31,35.2,65,35.2,67.69,35.2,70.38,35.2,73.08,35.2,75.77,35.2,78.46,35.2,81.15,35.2,83.85,35.2,86.54,35.2,89.23,35.2,91.92,35.2,94.61,35.2,97.31,35.2,100,35.2,102.69,35.2,105.38,35.2,108.08,35.2,110.77,35.2,113.46,35.2,116.15,35.2,118.85,35.2,126.92,35.2,135,35.2,137.69,37.4,-121.84,37.4,-119.07,37.4,-116.31,37.4,-113.54,37.4,-110.77,37.4,-108,37.4,-105.23,37.4,-102.46,37.4,-99.69,37.4,-96.92,37.4,-94.15,37.4,-91.38,37.4,-88.61,37.4,-85.84,37.4,-83.07,37.4,-80.3,37.4,-77.53,37.4,-8.3,37.4,-5.53,37.4,-2.76,37.4,13.85,37.4,22.16,37.4,27.7,37.4,30.47,37.4,33.24,37.4,36.01,37.4,38.78,37.4,41.55,37.4,44.32,37.4,47.09,37.4,49.85,37.4,55.39,37.4,58.16,37.4,60.93,37.4,63.7,37.4,66.47,37.4,69.24,37.4,72.01,37.4,74.78,37.4,77.55,37.4,80.32,37.4,83.09,37.4,85.86,37.4,88.63,37.4,91.39,37.4,94.16,37.4,96.93,37.4,99.7,37.4,102.47,37.4,105.24,37.4,108.01,37.4,110.78,37.4,113.55,37.4,116.32,37.4,121.86,37.4,127.4,37.4,138.47,39.6,-122.9,39.6,-120.04,39.6,-117.18,39.6,-114.33,39.6,-111.47,39.6,-108.62,39.6,-105.76,39.6,-102.91,39.6,-100.05,39.6,-97.2,39.6,-94.34,39.6,-91.49,39.6,-88.63,39.6,-85.78,39.6,-82.92,39.6,-80.07,39.6,-77.21,39.6,-74.36,39.6,-8.69,39.6,-5.83,39.6,-2.98,39.6,8.45,39.6,22.72,39.6,28.43,39.6,31.29,39.6,34.14,39.6,37,39.6,39.85,39.6,42.71,39.6,45.56,39.6,48.42,39.6,54.13,39.6,56.98,39.6,59.84,39.6,62.7,39.6,65.55,39.6,68.41,39.6,71.26,39.6,74.12,39.6,76.97,39.6,79.83,39.6,82.68,39.6,85.54,39.6,88.39,39.6,91.25,39.6,94.1,39.6,96.96,39.6,99.81,39.6,102.67,39.6,105.52,39.6,108.38,39.6,111.23,39.6,114.09,39.6,116.94,39.6,122.66,39.6,125.51,41.8,-123.93,41.8,-120.98,41.8,-118.03,41.8,-115.08,41.8,-112.12,41.8,-109.17,41.8,-106.22,41.8,-103.27,41.8,-100.32,41.8,-97.37,41.8,-94.42,41.8,-91.47,41.8,-88.51,41.8,-85.56,41.8,-82.61,41.8,-79.66,41.8,-76.71,41.8,-73.76,41.8,-70.81,41.8,-8.83,41.8,-5.88,41.8,-2.93,41.8,0.02,41.8,8.87,41.8,14.77,41.8,20.68,41.8,23.63,41.8,26.58,41.8,35.43,41.8,44.29,41.8,47.24,41.8,56.09,41.8,59.04,41.8,61.99,41.8,64.94,41.8,67.9,41.8,70.85,41.8,73.8,41.8,76.75,41.8,79.7,41.8,82.65,41.8,85.6,41.8,88.55,41.8,91.5,41.8,94.46,41.8,97.41,41.8,100.36,41.8,103.31,41.8,106.26,41.8,109.21,41.8,112.16,41.8,115.11,41.8,118.06,41.8,121.02,41.8,123.97,41.8,126.92,44,-121.89,44,-118.83,44,-115.77,44,-112.72,44,-109.66,44,-106.6,44,-103.54,44,-100.48,44,-97.42,44,-94.37,44,-91.31,44,-88.25,44,-85.19,44,-82.13,44,-79.07,44,-76.02,44,-72.96,44,-69.9,44,0.44,44,3.5,44,6.56,44,12.68,44,15.74,44,18.79,44,21.85,44,24.91,44,27.97,44,40.2,44,43.26,44,46.32,44,52.44,44,55.49,44,58.55,44,61.61,44,64.67,44,67.73,44,70.79,44,73.84,44,76.9,44,79.96,44,83.02,44,86.08,44,89.14,44,92.19,44,95.25,44,98.31,44,101.37,44,104.43,44,107.49,44,110.54,44,113.6,44,116.66,44,119.72,44,122.78,44,125.84,44,128.89,44,131.95,44,135.01,44,144.19,46.2,-122.79,46.2,-119.61,46.2,-116.43,46.2,-113.25,46.2,-110.07,46.2,-106.89,46.2,-103.72,46.2,-100.54,46.2,-97.36,46.2,-94.18,46.2,-91,46.2,-87.82,46.2,-84.64,46.2,-81.47,46.2,-78.29,46.2,-75.11,46.2,-71.93,46.2,-68.75,46.2,-65.57,46.2,-62.39,46.2,1.18,46.2,4.35,46.2,7.53,46.2,10.71,46.2,13.89,46.2,17.07,46.2,20.25,46.2,23.43,46.2,26.6,46.2,29.78,46.2,32.96,46.2,39.32,46.2,42.5,46.2,45.68,46.2,48.85,46.2,55.21,46.2,58.39,46.2,61.57,46.2,64.75,46.2,67.93,46.2,71.1,46.2,74.28,46.2,77.46,46.2,80.64,46.2,83.82,46.2,87,46.2,90.18,46.2,93.35,46.2,96.53,46.2,99.71,46.2,102.89,46.2,106.07,46.2,109.25,46.2,112.43,46.2,115.6,46.2,118.78,46.2,121.96,46.2,125.14,46.2,128.32,46.2,131.5,46.2,134.67,46.2,137.85,48.4,-120.35,48.4,-117.04,48.4,-113.73,48.4,-110.41,48.4,-107.1,48.4,-103.79,48.4,-100.47,48.4,-97.16,48.4,-93.85,48.4,-90.53,48.4,-87.22,48.4,-83.9,48.4,-80.59,48.4,-77.28,48.4,-73.96,48.4,-70.65,48.4,-67.34,48.4,-57.4,48.4,-54.08,48.4,-4.38,48.4,-1.06,48.4,2.25,48.4,5.56,48.4,8.88,48.4,12.19,48.4,15.5,48.4,18.82,48.4,22.13,48.4,25.44,48.4,28.76,48.4,32.07,48.4,35.39,48.4,38.7,48.4,42.01,48.4,45.33,48.4,48.64,48.4,51.95,48.4,55.27,48.4,58.58,48.4,61.89,48.4,65.21,48.4,68.52,48.4,71.84,48.4,75.15,48.4,78.46,48.4,81.78,48.4,85.09,48.4,88.4,48.4,91.72,48.4,95.03,48.4,98.34,48.4,101.66,48.4,104.97,48.4,108.29,48.4,111.6,48.4,114.91,48.4,118.23,48.4,121.54,48.4,124.85,48.4,128.17,48.4,131.48,48.4,134.79,48.4,138.11,50.6,-128.01,50.6,-124.54,50.6,-121.08,50.6,-117.61,50.6,-114.15,50.6,-110.68,50.6,-107.21,50.6,-103.75,50.6,-100.28,50.6,-96.82,50.6,-93.35,50.6,-89.88,50.6,-86.42,50.6,-82.95,50.6,-79.48,50.6,-76.02,50.6,-72.55,50.6,-69.09,50.6,-65.62,50.6,-62.15,50.6,-3.23,50.6,3.7,50.6,7.17,50.6,10.63,50.6,14.1,50.6,17.56,50.6,21.03,50.6,24.5,50.6,27.96,50.6,31.43,50.6,34.89,50.6,38.36,50.6,41.83,50.6,45.29,50.6,48.76,50.6,52.22,50.6,55.69,50.6,59.16,50.6,62.62,50.6,66.09,50.6,69.55,50.6,73.02,50.6,76.49,50.6,79.95,50.6,83.42,50.6,86.88,50.6,90.35,50.6,93.82,50.6,97.28,50.6,100.75,50.6,104.22,50.6,107.68,50.6,111.15,50.6,114.61,50.6,118.08,50.6,121.55,50.6,125.01,50.6,128.48,50.6,131.94,50.6,135.41,50.6,138.88,50.6,142.34,52.8,-129.06,52.8,-125.42,52.8,-121.78,52.8,-118.14,52.8,-114.5,52.8,-110.86,52.8,-107.22,52.8,-103.59,52.8,-99.95,52.8,-96.31,52.8,-92.67,52.8,-89.03,52.8,-85.39,52.8,-78.11,52.8,-74.48,52.8,-70.84,52.8,-67.2,52.8,-63.56,52.8,-59.92,52.8,-56.28,52.8,-8.98,52.8,-1.7,52.8,5.58,52.8,9.22,52.8,12.86,52.8,16.49,52.8,20.13,52.8,23.77,52.8,27.41,52.8,31.05,52.8,34.69,52.8,38.33,52.8,41.97,52.8,45.6,52.8,49.24,52.8,52.88,52.8,56.52,52.8,60.16,52.8,63.8,52.8,67.44,52.8,71.08,52.8,74.71,52.8,78.35,52.8,81.99,52.8,85.63,52.8,89.27,52.8,92.91,52.8,96.55,52.8,100.19,52.8,103.82,52.8,107.46,52.8,111.1,52.8,114.74,52.8,118.38,52.8,122.02,52.8,125.66,52.8,129.3,52.8,132.93,52.8,136.57,52.8,140.21,52.8,158.41,55,-130.14,55,-126.3,55,-122.47,55,-118.63,55,-114.8,55,-110.96,55,-107.12,55,-103.29,55,-99.45,55,-95.62,55,-91.78,55,-87.95,55,-84.11,55,-76.44,55,-72.6,55,-68.77,55,-64.93,55,-61.1,55,-7.4,55,-3.56,55,11.78,55,23.29,55,27.12,55,30.96,55,34.79,55,38.63,55,42.46,55,46.3,55,50.13,55,53.97,55,57.81,55,61.64,55,65.48,55,69.31,55,73.15,55,76.98,55,80.82,55,84.66,55,88.49,55,92.33,55,96.16,55,100,55,103.83,55,107.67,55,111.5,55,115.34,55,119.18,55,123.01,55,126.85,55,130.68,55,134.52,55,157.53,55,161.37,57.2,-131.27,57.2,-127.2,57.2,-123.14,57.2,-119.08,57.2,-115.02,57.2,-110.96,57.2,-106.9,57.2,-102.84,57.2,-98.78,57.2,-94.71,57.2,-90.65,57.2,-74.41,57.2,-70.35,57.2,-66.29,57.2,-62.22,57.2,-5.37,57.2,14.94,57.2,23.06,57.2,27.12,57.2,31.18,57.2,35.25,57.2,39.31,57.2,43.37,57.2,47.43,57.2,51.49,57.2,55.55,57.2,59.61,57.2,63.67,57.2,67.73,57.2,71.8,57.2,75.86,57.2,79.92,57.2,83.98,57.2,88.04,57.2,92.1,57.2,96.16,57.2,100.22,57.2,104.29,57.2,108.35,57.2,112.41,57.2,116.47,57.2,120.53,57.2,124.59,57.2,128.65,57.2,132.71,57.2,136.78,57.2,157.08,57.2,161.14,59.4,-158.39,59.4,-154.07,59.4,-136.78,59.4,-132.46,59.4,-128.14,59.4,-123.82,59.4,-119.49,59.4,-115.17,59.4,-110.85,59.4,-106.53,59.4,-102.21,59.4,-97.88,59.4,-76.28,59.4,-71.95,59.4,5.84,59.4,10.16,59.4,14.48,59.4,27.45,59.4,31.77,59.4,36.09,59.4,40.41,59.4,44.74,59.4,49.06,59.4,53.38,59.4,57.7,59.4,62.02,59.4,66.35,59.4,70.67,59.4,74.99,59.4,79.31,59.4,83.63,59.4,87.95,59.4,92.28,59.4,96.6,59.4,100.92,59.4,105.24,59.4,109.56,59.4,113.89,59.4,118.21,59.4,122.53,59.4,126.85,59.4,131.17,59.4,135.49,59.4,139.82,59.4,144.14,59.4,148.46,59.4,152.78,59.4,161.43,61.6,-161.5,61.6,-156.87,61.6,-152.25,61.6,-147.62,61.6,-143,61.6,-138.37,61.6,-133.74,61.6,-129.12,61.6,-124.49,61.6,-119.87,61.6,-115.24,61.6,-110.62,61.6,-105.99,61.6,-101.37,61.6,-96.74,61.6,-73.61,61.6,-45.86,61.6,9.65,61.6,14.27,61.6,23.52,61.6,28.15,61.6,32.77,61.6,37.4,61.6,42.02,61.6,46.65,61.6,51.28,61.6,55.9,61.6,60.53,61.6,65.15,61.6,69.78,61.6,74.4,61.6,79.03,61.6,83.65,61.6,88.28,61.6,92.9,61.6,97.53,61.6,102.16,61.6,106.78,61.6,111.41,61.6,116.03,61.6,120.66,61.6,125.28,61.6,129.91,61.6,134.53,61.6,139.16,61.6,143.79,61.6,148.41,61.6,153.04,61.6,157.66,61.6,162.29,61.6,166.91,61.6,171.54,63.8,-160.07,63.8,-155.09,63.8,-150.1,63.8,-145.12,63.8,-140.14,63.8,-135.15,63.8,-130.17,63.8,-125.19,63.8,-120.2,63.8,-115.22,63.8,-110.24,63.8,-105.26,63.8,-100.27,63.8,-95.29,63.8,-85.32,63.8,-80.34,63.8,-70.38,63.8,-65.39,63.8,-50.44,63.8,-45.46,63.8,-20.55,63.8,9.35,63.8,14.33,63.8,19.32,63.8,24.3,63.8,29.28,63.8,34.27,63.8,39.25,63.8,44.23,63.8,49.22,63.8,54.2,63.8,59.18,63.8,64.16,63.8,69.15,63.8,74.13,63.8,79.11,63.8,84.1,63.8,89.08,63.8,94.06,63.8,99.04,63.8,104.03,63.8,109.01,63.8,113.99,63.8,118.98,63.8,123.96,63.8,128.94,63.8,133.93,63.8,138.91,63.8,143.89,63.8,148.87,63.8,153.86,63.8,158.84,63.8,163.82,63.8,168.81,63.8,173.79,66,-180,66,-174.59,66,-163.77,66,-158.36,66,-152.96,66,-147.55,66,-142.14,66,-136.73,66,-131.32,66,-125.91,66,-120.5,66,-115.09,66,-109.68,66,-104.28,66,-98.87,66,-93.46,66,-88.05,66,-71.82,66,-50.19,66,-44.78,66,-39.37,66,-23.14,66,-17.73,66,14.72,66,20.13,66,25.54,66,30.95,66,41.77,66,47.17,66,52.58,66,57.99,66,63.4,66,68.81,66,74.22,66,79.63,66,85.04,66,90.45,66,95.85,66,101.26,66,106.67,66,112.08,66,117.49,66,122.9,66,128.31,66,133.72,66,139.13,66,144.53,66,149.94,66,155.35,66,160.76,66,166.17,66,171.58,66,176.99,68.2,-180,68.2,-162.23,68.2,-156.3,68.2,-150.38,68.2,-144.46,68.2,-138.53,68.2,-132.61,68.2,-126.68,68.2,-120.76,68.2,-114.84,68.2,-97.06,68.2,-91.14,68.2,-85.22,68.2,-73.37,68.2,-67.44,68.2,-49.67,68.2,-43.75,68.2,-37.82,68.2,-31.9,68.2,21.42,68.2,27.34,68.2,33.27,68.2,39.19,68.2,45.11,68.2,51.04,68.2,56.96,68.2,62.89,68.2,68.81,68.2,74.73,68.2,80.66,68.2,86.58,68.2,92.51,68.2,98.43,68.2,104.35,68.2,110.28,68.2,116.2,68.2,122.13,68.2,128.05,68.2,133.97,68.2,139.9,68.2,145.82,68.2,151.75,68.2,157.67,68.2,163.59,68.2,169.52,68.2,175.44,70.4,-160.33,70.4,-153.77,70.4,-107.86,70.4,-94.74,70.4,-88.18,70.4,-81.63,70.4,-75.07,70.4,-48.83,70.4,-42.28,70.4,-35.72,70.4,-29.16,70.4,29.87,70.4,69.22,70.4,75.77,70.4,82.33,70.4,88.89,70.4,95.45,70.4,102.01,70.4,108.57,70.4,115.12,70.4,121.68,70.4,128.24,70.4,134.8,70.4,141.36,70.4,147.92,70.4,154.47,72.6,-121.15,72.6,-113.79,72.6,-106.43,72.6,-99.07,72.6,-84.36,72.6,-47.58,72.6,-40.22,72.6,-32.86,72.6,-25.51,72.6,55.42,72.6,70.13,72.6,84.85,72.6,92.2,72.6,99.56,72.6,106.92,72.6,114.27,72.6,121.63,72.6,143.7,74.8,-112.87,74.8,-96.09,74.8,-87.7,74.8,-54.14,74.8,-45.75,74.8,-37.35,74.8,-28.96,74.8,-20.57,74.8,88.51,74.8,96.9,74.8,105.29,74.8,138.85,77,-82.2,77,-62.64,77,-52.86,77,-43.08,77,-33.3,77,-23.52,77,15.6,77,103.62,79.2,-62.59,79.2,-50.85,79.2,-39.11,79.2,-27.37,79.2,19.59,79.2,101.78,81.4,-77.33,81.4,-48,81.4,-33.33,81.4,-18.67,83.6,-33.33];
+  var landPoints = [];
+  for (var li=0; li<LAND_FLAT.length; li+=4){ // every other sample: plenty to read as coastlines, half the per-frame fills
+    landPoints.push(toXYZ(LAND_FLAT[li], LAND_FLAT[li+1]));
+  }
+
+  // hub nodes: evenly spread (fibonacci sphere) + a light ring of connections
+  // (back to the original single-ring layout, and ~10x fewer edges than the dense mesh)
+  var HUB_N = 18;
+  var TOOL_ICON_COUNT = 8; // notes, tasks, automation, chat, sheet, api, calendar, database
+  var hubs = [];
+  for (var i=0;i<HUB_N;i++){
+    var lat3 = Math.asin(1 - 2*(i+0.5)/HUB_N) * 180/Math.PI;
+    var lon3 = (i * 137.508) % 360;
+    var hp = toXYZ(lat3, lon3);
+    hp.icon = i % TOOL_ICON_COUNT;
+    hubs.push(hp);
+  }
+  var EDGE_SEGMENTS = 10; // static arc resolution, precomputed once below (not per frame)
+  var EDGE_STEPS = [7]; // single ring connection, like the original design
+  var edges = [];
+  for (var i2=0;i2<HUB_N;i2++){
+    for (var si=0; si<EDGE_STEPS.length; si++){
+      var j = (i2 + EDGE_STEPS[si]) % HUB_N;
+      // precompute the static arc geometry once (slerp is trig-heavy; never call it inside the render loop per-segment)
+      var pathPts = [];
+      for (var seg=0; seg<=EDGE_SEGMENTS; seg++){
+        pathPts.push(slerp(hubs[i2], hubs[j], seg/EDGE_SEGMENTS));
+      }
+      edges.push({
+        a: hubs[i2], b: hubs[j],
+        path: pathPts,
+        phase: ((i2*7 + si*13) % 97) / 97,
+        speed: 0.1 + ((i2*5 + si*3) % 11) / 11 * 0.22
+      });
+    }
+  }
+
+  // starfield
+  var stars = [];
+  for (var s=0;s<70;s++){
+    stars.push({ x: Math.random(), y: Math.random(), r: Math.random()*1.2+0.3, ph: Math.random()*Math.PI*2 });
+  }
+
+  var currentAngle = -1.13; // frames Africa/Europe toward camera at rest
+  var last = performance.now();
+
+  function depthAlpha(z, lo, hi){
+    var t = (z + R) / (2*R);
+    t = Math.max(0, Math.min(1, t));
+    return lo + (hi-lo)*t;
+  }
+
+  function draw(now){
+    var dt = Math.min((now-last)/1000, 0.05); last = now;
+    if (!reduceMotion) currentAngle += dt*0.14;
+
+    ctx.clearRect(0,0,W,H);
+
+    // stars
+    for (var s2=0; s2<stars.length; s2++){
+      var st = stars[s2];
+      var tw = reduceMotion ? 0.5 : 0.5 + 0.5*Math.sin(now/900 + st.ph);
+      ctx.fillStyle = 'rgba(238,241,245,' + (0.12 + 0.35*tw*0.5).toFixed(3) + ')';
+      ctx.beginPath();
+      ctx.arc(st.x*W, st.y*H, st.r, 0, Math.PI*2);
+      ctx.fill();
+    }
+
+    // sphere rim, so the globe still reads as a sphere between the continents
+    ctx.beginPath();
+    ctx.strokeStyle = 'rgba(148,168,197,0.14)';
+    ctx.lineWidth = 1;
+    ctx.arc(cx, cy, R, 0, Math.PI*2);
+    ctx.stroke();
+
+    // continents, as a faint dot-map backdrop sampled from real coastlines
+    for (var lp=0; lp<landPoints.length; lp++){
+      var lpr = project(landPoints[lp]);
+      var la = depthAlpha(lpr.z, 0.06, 0.5);
+      var lsz = 1.1 + 0.6*depthAlpha(lpr.z, 0, 1);
+      ctx.fillStyle = 'rgba(150,171,201,'+la.toFixed(3)+')';
+      ctx.fillRect(lpr.x - lsz/2, lpr.y - lsz/2, lsz, lsz);
+    }
+
+    // edges + particles
+    for (var e=0; e<edges.length; e++){
+      drawEdge(edges[e], now);
+    }
+
+    // hub nodes: drawn as small tool-icon badges (the "external tools" GRAPH connects)
+    for (var h=0; h<hubs.length; h++){
+      var pr = project(hubs[h]);
+      var a = depthAlpha(pr.z, 0.32, 1);
+      var rad = 7 + 6*depthAlpha(pr.z,0,1);
+      drawToolIcon(pr.x, pr.y, rad, a, hubs[h].icon);
+    }
+
+    if (!reduceMotion) requestAnimationFrame(draw);
+  }
+
+  function drawEdge(edge, now){
+    // one path + one stroke per edge (perf: this runs for hundreds of edges/frame).
+    // the arc's points are precomputed once (see edge.path) - per frame we only
+    // rotate + project them, never re-run the trig-heavy slerp here.
+    ctx.beginPath();
+    var midZ = 0;
+    var path = edge.path;
+    for (var i=0;i<path.length;i++){
+      var pr = project(path[i]);
+      if (i===0) ctx.moveTo(pr.x, pr.y); else ctx.lineTo(pr.x, pr.y);
+      if (i === (path.length>>1)) midZ = pr.z;
+    }
+    var a = depthAlpha(midZ, 0.015, 0.24);
+    ctx.strokeStyle = 'rgba(255,157,82,'+a.toFixed(3)+')';
+    ctx.lineWidth = 1;
+    ctx.stroke();
+
+    var tp = reduceMotion ? 0.5 : ((now/1000)*edge.speed + edge.phase) % 1;
+    var wp = slerp(edge.a, edge.b, tp);
+    var pp = project(wp);
+    var ap = depthAlpha(pp.z, 0.3, 1);
+    ctx.beginPath();
+    ctx.fillStyle = 'rgba(255,157,82,'+(ap*0.28).toFixed(3)+')';
+    ctx.arc(pp.x, pp.y, 4.5, 0, Math.PI*2);
+    ctx.fill();
+    ctx.beginPath();
+    ctx.fillStyle = 'rgba(255,201,153,'+ap.toFixed(3)+')';
+    ctx.arc(pp.x, pp.y, 1.7, 0, Math.PI*2);
+    ctx.fill();
+  }
+
+  // ---- generic tool-icon glyphs (no brand logos: simple line icons for the
+  // categories of external tools GRAPH connects - notes, tasks, automation, etc.)
+  function roundRectPath(x,y,w,h,r){
+    ctx.beginPath();
+    ctx.moveTo(x+r,y);
+    ctx.lineTo(x+w-r,y);
+    ctx.arcTo(x+w,y,x+w,y+r,r);
+    ctx.lineTo(x+w,y+h-r);
+    ctx.arcTo(x+w,y+h,x+w-r,y+h,r);
+    ctx.lineTo(x+r,y+h);
+    ctx.arcTo(x,y+h,x,y+h-r,r);
+    ctx.lineTo(x,y+r);
+    ctx.arcTo(x,y,x+r,y,r);
+    ctx.closePath();
+  }
+  function hline(x,y,w){ ctx.beginPath(); ctx.moveTo(x,y); ctx.lineTo(x+w,y); ctx.stroke(); }
+  function vline(x,y,h){ ctx.beginPath(); ctx.moveTo(x,y); ctx.lineTo(x,y+h); ctx.stroke(); }
+  function ellipseLine(cx0,cy0,rx,ry){ ctx.beginPath(); ctx.ellipse(cx0,cy0,rx,ry,0,0,Math.PI*2); ctx.stroke(); }
+  function drawGear(cx0,cy0,innerR,outerR,teeth){
+    ctx.beginPath();
+    for (var t=0;t<teeth*2;t++){
+      var ang = (t/(teeth*2))*Math.PI*2;
+      var rr = (t%2===0) ? outerR : innerR;
+      var px = cx0+Math.cos(ang)*rr, py = cy0+Math.sin(ang)*rr;
+      if (t===0) ctx.moveTo(px,py); else ctx.lineTo(px,py);
+    }
+    ctx.closePath();
+    ctx.stroke();
+    ctx.beginPath(); ctx.arc(cx0,cy0,innerR*0.55,0,Math.PI*2); ctx.stroke();
+  }
+
+  function drawToolIcon(x, y, r, alpha, type){
+    var s = r/10; // glyphs are authored for r=10, then scaled
+    ctx.save();
+    ctx.translate(x, y);
+
+    // badge: a small cutout chip so the icon reads clearly over the network
+    ctx.beginPath();
+    ctx.fillStyle = 'rgba(10,13,18,'+(alpha*0.92).toFixed(3)+')';
+    ctx.arc(0, 0, r, 0, Math.PI*2);
+    ctx.fill();
+    ctx.lineWidth = Math.max(1, 1.1*s);
+    ctx.strokeStyle = 'rgba(91,140,255,'+alpha.toFixed(3)+')';
+    ctx.beginPath();
+    ctx.arc(0, 0, r, 0, Math.PI*2);
+    ctx.stroke();
+
+    ctx.strokeStyle = 'rgba(212,223,241,'+alpha.toFixed(3)+')';
+    ctx.fillStyle = 'rgba(212,223,241,'+alpha.toFixed(3)+')';
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+    ctx.lineWidth = Math.max(1, 1.15*s);
+
+    switch(type % 8){
+      case 0: // notes / knowledge vault
+        roundRectPath(-4.2*s,-5*s,8.4*s,10*s,1.4*s); ctx.stroke();
+        hline(-2.4*s,-1.6*s,4.8*s);
+        hline(-2.4*s, 0.6*s,4.8*s);
+        hline(-2.4*s, 2.8*s,3.0*s);
+        break;
+      case 1: // tasks / project tracker
+        roundRectPath(-4.6*s,-4.6*s,9.2*s,9.2*s,1.3*s); ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(-2.2*s,0.2*s);
+        ctx.lineTo(-0.6*s,1.8*s);
+        ctx.lineTo(2.6*s,-2.2*s);
+        ctx.stroke();
+        break;
+      case 2: // automation
+        drawGear(0,0,3.6*s,5.2*s,6);
+        break;
+      case 3: // chat / comms
+        roundRectPath(-4.6*s,-4*s,9.2*s,7.2*s,2.2*s); ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(-1.4*s,3.2*s);
+        ctx.lineTo(-2.6*s,5.6*s);
+        ctx.lineTo(0.6*s,3.2*s);
+        ctx.closePath();
+        ctx.fill();
+        break;
+      case 4: // spreadsheets / data
+        roundRectPath(-4.6*s,-4.6*s,9.2*s,9.2*s,1.2*s); ctx.stroke();
+        vline(0,-4.6*s,9.2*s);
+        hline(-4.6*s,0,9.2*s);
+        break;
+      case 5: // APIs / integrations
+        ctx.beginPath();
+        ctx.moveTo(-1.2*s,-4.4*s); ctx.lineTo(-4.4*s,0); ctx.lineTo(-1.2*s,4.4*s);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(1.2*s,-4.4*s); ctx.lineTo(4.4*s,0); ctx.lineTo(1.2*s,4.4*s);
+        ctx.stroke();
+        break;
+      case 6: // calendar / scheduling
+        roundRectPath(-4.6*s,-4.2*s,9.2*s,8.6*s,1.2*s); ctx.stroke();
+        hline(-4.6*s,-1.6*s,9.2*s);
+        ctx.beginPath(); ctx.arc(0,1.6*s,1*s,0,Math.PI*2); ctx.fill();
+        break;
+      case 7: // database / structured records
+        ellipseLine(0,-3*s,4.2*s,1.6*s);
+        ellipseLine(0,0,4.2*s,1.6*s);
+        ellipseLine(0,3*s,4.2*s,1.6*s);
+        vline(-4.2*s,-3*s,6*s);
+        vline(4.2*s,-3*s,6*s);
+        break;
+    }
+    ctx.restore();
+  }
+
+  requestAnimationFrame(draw);
+})();
+</script>
+
+</body></html>
