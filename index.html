@@ -486,7 +486,7 @@
 
   /* ---------- CONTACT / FOOTER ---------- */
   footer{border-top:1px solid var(--line);background:var(--bg-raised);}
-  .contact{padding:88px 0 64px;text-align:left;}
+  .contact{padding-top:88px;padding-bottom:64px;text-align:left;}
   .contact h2{font-size:clamp(1.8rem,2.6vw+1rem,3rem);max-width:14ch;margin-bottom:22px;}
   .contact-row{display:flex;align-items:center;gap:22px;flex-wrap:wrap;margin-top:8px;}
   .contact-email{
@@ -498,9 +498,24 @@
     padding-bottom:2px;
   }
   .contact-email:hover{border-color:var(--accent);}
+  .contact-form{display:grid;gap:16px;max-width:620px;margin-top:28px;}
+  .cf-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  @media (max-width:640px){ .cf-row{grid-template-columns:1fr;} }
+  .contact-form label{display:flex;flex-direction:column;gap:7px;font-family:var(--font-mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-dim);}
+  .contact-form .opt{text-transform:none;letter-spacing:0;color:var(--ink-faint);}
+  .contact-form input, .contact-form textarea{font-family:var(--font-body);font-size:.95rem;letter-spacing:0;text-transform:none;color:var(--ink);background:var(--bg);border:1px solid var(--line-strong);border-radius:4px;padding:12px 14px;transition:border-color .15s ease;}
+  .contact-form textarea{resize:vertical;min-height:130px;line-height:1.5;}
+  .contact-form textarea::placeholder{color:var(--ink-faint);}
+  .contact-form input:focus, .contact-form textarea:focus{outline:none;border-color:var(--accent);}
+  .contact-form .hp{display:none;}
+  .cf-actions{display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin-top:4px;}
+  .cf-status{font-family:var(--font-mono);font-size:.8rem;color:var(--ink-dim);margin:0;}
+  .cf-status.ok{color:var(--accent);}
+  .cf-status.err{color:#ff7a7a;}
+  .btn[disabled]{opacity:.6;cursor:default;transform:none;}
   .foot-bottom{
     border-top:1px solid var(--line);
-    padding:22px 0;
+    padding-top:22px;padding-bottom:22px;
     display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
     font-family:var(--font-mono);
     font-size:.72rem;
@@ -818,10 +833,22 @@
     <div class="eyebrow">Get in touch</div>
     <h2 style="margin-top:16px;">Let's connect your systems.</h2>
     <p style="color:var(--ink-dim);max-width:48ch;">Tell me what's scattered across too many tools right now, and where you'd want it to end up instead.</p>
-    <div class="contact-row">
-      <a class="contact-email" href="mailto:olafappel@web.de">olafappel@web.de</a>
-      <a class="btn btn-primary" href="mailto:olafappel@web.de">Start a conversation</a>
-    </div>
+    <form class="contact-form" id="contactForm" action="https://api.web3forms.com/submit" method="POST">
+      <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY">
+      <input type="hidden" name="subject" value="New message from the GRAPH website">
+      <input type="hidden" name="from_name" value="GRAPH website">
+      <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <div class="cf-row">
+        <label>Name<input name="name" required autocomplete="name"></label>
+        <label>Email<input type="email" name="email" required autocomplete="email"></label>
+      </div>
+      <label><span>Company <span class="opt">(optional)</span></span><input name="company" autocomplete="organization"></label>
+      <label>What should be connected?<textarea name="message" rows="5" required placeholder="The tools you use today, and what you'd like them to do together."></textarea></label>
+      <div class="cf-actions">
+        <button class="btn btn-primary" type="submit">Send message</button>
+        <p class="cf-status" role="status" aria-live="polite"></p>
+      </div>
+    </form>
   </div>
   <div class="wrap foot-bottom">
     <span>GRAPH — Forward Deployed Engineering</span>
@@ -1126,6 +1153,44 @@
   }
 
   requestAnimationFrame(draw);
+})();
+</script>
+
+<script>
+(function(){
+  var form = document.getElementById('contactForm');
+  if (!form) return;
+  var status = form.querySelector('.cf-status');
+  var btn = form.querySelector('button[type=submit]');
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    if (form.access_key.value === 'YOUR_ACCESS_KEY') {
+      status.className = 'cf-status err';
+      status.textContent = 'The form is being connected right now. Please try again a little later.';
+      return;
+    }
+    status.className = 'cf-status';
+    status.textContent = 'Sending...';
+    btn.disabled = true;
+    var data = Object.fromEntries(new FormData(form));
+    fetch(form.action, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(data)
+    })
+      .then(function(r){ return r.json(); })
+      .then(function(res){
+        if (!res.success) throw new Error(res.message || 'failed');
+        form.reset();
+        status.className = 'cf-status ok';
+        status.textContent = "Thanks, your message is on its way. I'll reply by email.";
+      })
+      .catch(function(){
+        status.className = 'cf-status err';
+        status.textContent = "That didn't go through. Please try again in a moment.";
+      })
+      .then(function(){ btn.disabled = false; });
+  });
 })();
 </script>
 
